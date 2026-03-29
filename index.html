@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trilogy Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f7f7f7;
+      color: #333;
+    }
+
+    /* NAVBAR */
+    nav {
+      background: #111;
+      color: white;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    nav h2 {
+      letter-spacing: 1px;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(to right, #e3f2fd, #fce4ec);
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: auto;
+      font-size: 16px;
+    }
+
+    /* MEMBERS */
+    .members {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .members h2 {
+      margin-bottom: 30px;
+    }
+
+    .member-cards {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      width: 250px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .card a {
+      text-decoration: none;
+      color: white;
+      background: #333;
+      padding: 8px 15px;
+      border-radius: 5px;
+    }
+
+    /* BLOG PREVIEW */
+    .blogs {
+      padding: 50px 20px;
+      background: #fff;
+    }
+
+    .blogs h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .blog-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .blog-card {
+      width: 300px;
+      background: #fafafa;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    .blog-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .blog-content {
+      padding: 15px;
+    }
+
+    .blog-content h4 {
+      margin-bottom: 10px;
+    }
+
+    .blog-content p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      color: white;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <h2>Trilogy</h2>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Welcome to Trilogy</h1>
+    <p>A space where three perspectives meet — thoughts, experiences, and stories from Dishti, Mallika, and Palak.</p>
+  </section>
+
+  <!-- MEMBERS -->
+  <section class="members">
+    <h2>Meet the Writers</h2>
+
+    <div class="member-cards">
+
+      <div class="card">
+        <h3>DISHTI</h3>
+        <p>Thoughts, tech, reflections and deeper perspectives.</p>
+        <a href="dishti/index.html">Explore</a>
+      </div>
+
+      <div class="card">
+        <h3>MALLIKA</h3>
+        <p>Creative insights, stories and expressive writing.</p>
+        <a href="mallika/index.html">Explore</a>
+      </div>
+
+      <div class="card">
+        <h3>PALAK</h3>
+        <p>Life moments, ideas and personal experiences.</p>
+        <a href="palak/index.html">Explore</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BLOG PREVIEW -->
+  <section class="blogs">
+    <h2>Recent Posts</h2>
+
+    <div class="blog-container">
+
+      <div class="blog-card">
+        <img src="https://via.placeholder.com/300x180">
+        <div class="blog-content">
+          <h4>Understanding Growth</h4>
+          <p>A reflection on how small habits shape who we become.</p>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <img src="https://via.placeholder.com/300x180">
+        <div class="blog-content">
+          <h4>Tech & Creativity</h4>
+          <p>Where logic meets imagination in modern development.</p>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <img src="https://via.placeholder.com/300x180">
+        <div class="blog-content">
+          <h4>Moments That Matter</h4>
+          <p>Capturing the beauty in everyday life experiences.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Trilogy Blog | Created by Dishti, Mallika & Palak</p>
+  </footer>
+
+</body>
+</html>
