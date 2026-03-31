@@ -13,6 +13,60 @@ function generateStarBoxShadow(count) {
   return shadows.join(', ');
 }
 
+const blogs = [
+  {
+    id: 1,
+    title: "My First Blog",
+    content: "This is my first blog about my journey in tech."
+  },
+  {
+    id: 2,
+    title: "Why I Love Building Things",
+    content: "Creating things gives me purpose and excitement."
+  }
+];
+
+const container = document.getElementById("blog-container");
+
+blogs.forEach(blog => {
+  const div = document.createElement("div");
+  div.classList.add("blog-card");
+
+  div.innerHTML = `
+    <h3>${blog.title}</h3>
+    <p>${blog.content}</p>
+    <button onclick="likePost(${blog.id})">❤️ Like</button>
+    <p id="likes-${blog.id}">0 Likes</p>
+
+    <div>
+      <input type="text" id="comment-input-${blog.id}" placeholder="Write a comment">
+      <button onclick="addComment(${blog.id})">Comment</button>
+      <div id="comments-${blog.id}"></div>
+    </div>
+  `;
+
+  function likePost(id) {
+  let count = localStorage.getItem("likes-" + id) || 0;
+  count++;
+  localStorage.setItem("likes-" + id, count);
+  document.getElementById("likes-" + id).innerText = count + " Likes";
+}
+
+  function addComment(id) {
+  const input = document.getElementById(`comment-input-${id}`);
+  const commentBox = document.getElementById(`comments-${id}`);
+
+  if (input.value.trim() === "") return;
+
+  const p = document.createElement("p");
+  p.innerText = input.value;
+
+  commentBox.appendChild(p);
+  input.value = "";
+}
+
+  container.appendChild(div);
+});
 window.addEventListener('load', function () {
   // Generate dynamic stars for "enchanting" density
   const stars1 = document.getElementById('stars');
