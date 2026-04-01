@@ -31,13 +31,14 @@
   <nav>
     <a href="index.html" class="stardust-hover">Home</a>
     <a href="index.html#notes" class="stardust-hover">Notes</a>
+    <a href="index.html#blog" class="stardust-hover">Blog</a>
     <a href="index.html#lab" class="stardust-hover">Lab</a>
   </nav>
 
   <header class="hero">
 
     <div class="header-content">
-      <p class="small-intro">Hello.</p>
+      <p class="small-intro">Hello .</p>
       <h1 class="fade-up title stardust-hover">Dishti.</h1>
       <hr style="width:40px; margin: 24px auto; border-color: rgba(255,255,255,0.15);">
       <p class="fade-up subtitle">Web Developer & Student</p>
@@ -54,7 +55,7 @@
     <div class="star-divider">✦ &nbsp; ✦ &nbsp; ✦</div>
 
     <section id="intro" class="reveal">
-      <h2>Helloooo There!!!</h2>
+      <h2>Helloooo Duniya!!!</h2>
       <p>
         Here's a wanderer of dreams, a girl sometimes buried deep in the pages of her books or writing the stories of
         her own. Now cast as a student of Computer Science and Engineering. Welp, the world of stories is now replaced
@@ -62,11 +63,7 @@
       </p>
     </section>
 
-     <section id="blog">
-  <h2>My Blogs</h2>
-  <div id="blog-container"></div>
-    </section>
-    
+
     <div class="star-divider">✦ &nbsp; ✦ &nbsp; ✦</div>
 
     <section id="notes" class="reveal">
@@ -106,6 +103,14 @@
       </div>
     </section>
 
+
+    <div class="star-divider">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+    <section id="blog" class="reveal">
+      <h2 class="slide-in from-left">Galactic Blog</h2>
+      <p class="blog-subtitle">A small constellation of thoughts, updates, and cosmic code notes.</p>
+      <div id="blog-container" class="blog-grid"></div>
+    </section>
 
     <div class="star-divider">✦ &nbsp; ✦ &nbsp; ✦</div>
 
@@ -260,6 +265,24 @@
     </section>
 
   </main>
+
+  <div id="blog-modal" class="blog-modal hidden" aria-hidden="true">
+    <div class="blog-modal-overlay" id="blog-modal-overlay"></div>
+    <div class="blog-modal-content" role="dialog" aria-modal="true" aria-labelledby="blog-modal-title">
+      <button class="blog-modal-close" id="blog-modal-close" aria-label="Close blog details">✕</button>
+      <h3 id="blog-modal-title">Blog title</h3>
+      <p class="blog-modal-date" id="blog-modal-date">Date</p>
+      <p id="blog-modal-body"></p>
+      <div id="blog-comment-section" class="blog-comment-section">
+        <h4>Comments</h4>
+        <div id="blog-comments-list" class="blog-comments-list"></div>
+        <form id="blog-comment-form" class="blog-comment-form">
+          <textarea id="blog-comment-input" rows="3" placeholder="Share your thought" required></textarea>
+          <button type="submit" class="blog-btn">Submit Comment</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <footer>
     <p> Built slowly, still learning </p>

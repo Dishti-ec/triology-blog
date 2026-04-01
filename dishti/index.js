@@ -13,60 +13,6 @@ function generateStarBoxShadow(count) {
   return shadows.join(', ');
 }
 
-const blogs = [
-  {
-    id: 1,
-    title: "My First Blog",
-    content: "This is my first blog about my journey in tech."
-  },
-  {
-    id: 2,
-    title: "Why I Love Building Things",
-    content: "Creating things gives me purpose and excitement."
-  }
-];
-
-const container = document.getElementById("blog-container");
-
-blogs.forEach(blog => {
-  const div = document.createElement("div");
-  div.classList.add("blog-card");
-
-  div.innerHTML = `
-    <h3>${blog.title}</h3>
-    <p>${blog.content}</p>
-    <button onclick="likePost(${blog.id})">❤️ Like</button>
-    <p id="likes-${blog.id}">0 Likes</p>
-
-    <div>
-      <input type="text" id="comment-input-${blog.id}" placeholder="Write a comment">
-      <button onclick="addComment(${blog.id})">Comment</button>
-      <div id="comments-${blog.id}"></div>
-    </div>
-  `;
-
-  function likePost(id) {
-  let count = localStorage.getItem("likes-" + id) || 0;
-  count++;
-  localStorage.setItem("likes-" + id, count);
-  document.getElementById("likes-" + id).innerText = count + " Likes";
-}
-
-  function addComment(id) {
-  const input = document.getElementById(`comment-input-${id}`);
-  const commentBox = document.getElementById(`comments-${id}`);
-
-  if (input.value.trim() === "") return;
-
-  const p = document.createElement("p");
-  p.innerText = input.value;
-
-  commentBox.appendChild(p);
-  input.value = "";
-}
-
-  container.appendChild(div);
-});
 window.addEventListener('load', function () {
   // Generate dynamic stars for "enchanting" density
   const stars1 = document.getElementById('stars');
@@ -699,3 +645,188 @@ function initContactForm() {
     }, 1200);
   });
 }
+
+// ---- Blog System ----
+const blogPosts = [
+  {
+    id: 'intro-to-nova',
+    title: 'Navigating the Nova UI',
+    preview: 'A walkthrough of the space-inspired visual system, handling animation sequences and accessible glow effects.',
+    fullContent: 'In this post, we dive into the design decisions behind the Nova theme: star field depth, glassmorphism overlays, and subtle performance-safe animations. You will learn how to prioritize visual richness without harming accessibility or responsiveness.',
+    date: '2026-03-01'
+  },
+  {
+    id: 'async-constellations',
+    title: 'Async Constellations in Vanilla JS',
+    preview: 'Building performance-friendly constellation systems using requestAnimationFrame and scroll-linked parallax effects.',
+    fullContent: 'This post explains how requestAnimationFrame can be used to sync visual effects and avoid janky motion. It also covers how to keep event listeners clean, avoid memory leaks, and create skip/prefers-reduced-motion fallbacks.',
+    date: '2026-02-16'
+  },
+  {
+    id: 'cosmic-thoughts',
+    title: 'Code, Coffee, and Cosmic Dreams',
+    preview: 'A short narrative on the process of turning late-night ideas into deployable web experiments.',
+    fullContent: 'Sometimes the best ideas arrive on the edge of sleep. This piece explores journaling, rapid prototyping, and capturing creative momentum with minimal dough. Learn how to implement a low-friction notes loop as you build.',
+    date: '2026-01-28'
+  }
+];
+
+const BLOG_STORAGE_KEY = 'cosmicBlogLikes';
+const COMMENT_STORAGE_KEY = 'cosmicBlogComments';
+
+function getBlogLikes() {
+  try {
+    return JSON.parse(localStorage.getItem(BLOG_STORAGE_KEY)) || {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function setBlogLikes(likes) {
+  localStorage.setItem(BLOG_STORAGE_KEY, JSON.stringify(likes));
+}
+
+function getBlogComments() {
+  try {
+    return JSON.parse(localStorage.getItem(COMMENT_STORAGE_KEY)) || {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function setBlogComments(comments) {
+  localStorage.setItem(COMMENT_STORAGE_KEY, JSON.stringify(comments));
+}
+
+function renderBlogCards() {
+  const container = document.getElementById('blog-container');
+  if (!container) return;
+
+  const likes = getBlogLikes();
+
+  container.innerHTML = '';
+
+  blogPosts.forEach((post, index) => {
+    const card = document.createElement('article');
+    card.className = 'blog-card reveal';
+    if (index === 0) card.classList.add('delay-100');
+    if (index === 1) card.classList.add('delay-200');
+    if (index === 2) card.classList.add('delay-300');
+    
+    card.innerHTML = `
+      <span class="badge-date">${post.date}</span>
+      <h3>${post.title}</h3>
+      <p>${post.preview}</p>
+      <div class="blog-actions">
+        <button class="blog-btn" data-action="read" data-id="${post.id}">Read More</button>
+        <button class="blog-like-btn" data-action="like" data-id="${post.id}">❤️ <span id="like-count-${post.id}">${likes[post.id] || 0}</span></button>
+      </div>
+    `;
+
+    container.appendChild(card);
+
+    card.querySelector('[data-action="read"]').addEventListener('click', () => openBlogModal(post));
+    card.querySelector('[data-action="like"]').addEventListener('click', () => {
+      const currentLikes = getBlogLikes();
+      currentLikes[post.id] = (currentLikes[post.id] || 0) + 1;
+      setBlogLikes(currentLikes);
+      document.getElementById(`like-count-${post.id}`).textContent = currentLikes[post.id];
+    });
+  });
+
+  // Re-observe newly created cards
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -100px 0px'
+  });
+
+  const revealElements = container.querySelectorAll('.reveal');
+  revealElements.forEach(el => observer.observe(el));
+}
+
+function openBlogModal(post) {
+  const modal = document.getElementById('blog-modal');
+  const body = document.getElementById('blog-modal-body');
+  const title = document.getElementById('blog-modal-title');
+  const date = document.getElementById('blog-modal-date');
+  const commentsList = document.getElementById('blog-comments-list');
+  const commentForm = document.getElementById('blog-comment-form');
+  const commentInput = document.getElementById('blog-comment-input');
+
+  if (!modal || !body || !title || !date || !commentsList || !commentForm || !commentInput) return;
+
+  title.textContent = post.title;
+  date.textContent = post.date;
+  body.textContent = post.fullContent;
+
+  const comments = getBlogComments();
+  const postComments = comments[post.id] || [];
+
+  commentsList.innerHTML = '';
+
+  if (postComments.length === 0) {
+    commentsList.innerHTML = '<p style="color: var(--text-muted);">No comments yet. Be the first traveler to write one.</p>';
+  } else {
+    postComments.forEach(c => {
+      const item = document.createElement('div');
+      item.className = 'blog-comment-item';
+      item.innerHTML = `<strong>${c.timestamp}</strong><br><span>${c.text}</span>`;
+      commentsList.appendChild(item);
+    });
+  }
+
+  commentForm.onsubmit = (event) => {
+    event.preventDefault();
+    const value = commentInput.value.trim();
+    if (!value) return;
+
+    const currentComments = getBlogComments();
+    currentComments[post.id] = currentComments[post.id] || [];
+    currentComments[post.id].push({
+      text: value,
+      timestamp: new Date().toLocaleString()
+    });
+    setBlogComments(currentComments);
+    commentInput.value = '';
+    openBlogModal(post); // refresh comments display
+  };
+
+  modal.classList.remove('hidden');
+  modal.setAttribute('aria-hidden', 'false');
+}
+
+function closeBlogModal() {
+  const modal = document.getElementById('blog-modal');
+  if (!modal) return;
+  modal.classList.add('hidden');
+  modal.setAttribute('aria-hidden', 'true');
+}
+
+function initBlogSystem() {
+  renderBlogCards();
+
+  const closeBtn = document.getElementById('blog-modal-close');
+  const overlay = document.getElementById('blog-modal-overlay');
+
+  if (closeBtn) closeBtn.addEventListener('click', closeBlogModal);
+  if (overlay) overlay.addEventListener('click', closeBlogModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeBlogModal();
+  });
+}
+
+// Wire into existing setup
+document.addEventListener('DOMContentLoaded', () => {
+  initTimeline();
+  initOrbitSystem();
+  initContactForm();
+  initBlogSystem();
+});
