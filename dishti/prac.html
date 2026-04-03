@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Living Cosmos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: radial-gradient(circle at center, #0b1a2a, #050d18 80%);
+      font-family: 'Arial', sans-serif;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    .title {
+      position: absolute;
+      top: 40%;
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      z-index: 2;
+    }
+
+    .subtitle {
+      position: absolute;
+      top: 48%;
+      width: 100%;
+      text-align: center;
+      color: #ccc;
+      font-size: 1rem;
+      z-index: 2;
+    }
+  </style>
+</head>
+
+<body>
+
+<canvas id="cosmos"></canvas>
+
+<div class="title">Living Cosmos</div>
+<div class="subtitle">An interactive sky of motion, light, and depth</div>
+
+<script src="cosmos.js"></script>
+
+</body>
+</html>
