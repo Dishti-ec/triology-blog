@@ -14,6 +14,8 @@
 
 <body>
 
+  <div id="scroll-progress"></div>
+
   <div id="loader-wrapper">
     <div id="stars"></div>
     <div id="stars2"></div>
@@ -38,12 +40,17 @@
   <header class="hero">
 
     <div class="header-content">
-      <p class="small-intro">Hello .</p>
+      <p class="small-intro">Exploring code, creativity and everything in between.</p>
       <h1 class="fade-up title stardust-hover">Dishti.</h1>
       <hr style="width:40px; margin: 24px auto; border-color: rgba(255,255,255,0.15);">
-      <p class="fade-up subtitle">Web Developer & Student</p>
+      <p class="fade-up subtitle" id="hero-subtitle">Code • Words • Curiosity </p>
       <a href="#lab" class="view-work">Experiments</a>
     </div>
+
+    <a href="#intro" class="scroll-indicator" aria-label="Scroll down">
+      <span>Scroll</span>
+      <div class="scroll-indicator-arrow"></div>
+    </a>
 
     <!-- side decorative figures removed -->
 
@@ -285,7 +292,12 @@
   </div>
 
   <footer>
-    <p> Built slowly, still learning </p>
+    <div class="footer-links">
+      <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:dishti@example.com">Contact</a>
+    </div>
+    <p>Built slowly, still learning &nbsp;✦&nbsp; &copy; 2026 Dishti</p>
   </footer>
 
 </body>

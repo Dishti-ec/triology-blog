@@ -158,13 +158,20 @@ body.loaded #stars3 {
 }
 
 nav {
-  background: transparent;
-  padding: 40px 20px 20px;
+  background: rgba(5, 10, 20, 0);
+  padding: 22px 20px;
   text-align: center;
   backdrop-filter: none;
-  position: relative;
-  /* Ensure interaction above canvas */
-  z-index: 10;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+}
+
+nav.scrolled {
+  background: rgba(5, 10, 20, 0.75);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 1px 0 rgba(126,231,255,0.08);
 }
 
 nav a {
@@ -902,8 +909,94 @@ section {
 
 footer {
   text-align: center;
-  padding: 18px 0;
-  color: rgba(230, 238, 248, 0.7);
+  padding: 32px 20px;
+  color: rgba(230, 238, 248, 0.4);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  position: relative;
+  z-index: 10;
+}
+
+footer .footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 12px;
+}
+
+footer .footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+footer .footer-links a:hover {
+  color: #7ee7ff;
+}
+
+/* ── Typing cursor blink ── */
+.typing-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: #7ee7ff;
+  margin-left: 3px;
+  vertical-align: middle;
+  animation: blinkCursor 0.8s step-end infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ── Scroll Down Indicator ── */
+.scroll-indicator {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+  animation-delay: 3s;
+  cursor: pointer;
+  z-index: 10;
+  text-decoration: none;
+}
+
+.scroll-indicator span {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(126,231,255,0.5);
+}
+
+.scroll-indicator-arrow {
+  width: 20px;
+  height: 20px;
+  border-right: 1px solid rgba(126,231,255,0.5);
+  border-bottom: 1px solid rgba(126,231,255,0.5);
+  transform: rotate(45deg);
+  animation: arrowBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes arrowBounce {
+  0%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.5; }
+  50% { transform: rotate(45deg) translateY(5px); opacity: 1; }
+}
+
+/* ── Stardust hover effect ── */
+.stardust-hover {
+  position: relative;
 }
 
 /* Animation utility classes */
@@ -969,8 +1062,22 @@ body.loaded .hero .view-work {
 
 .small-intro {
   font-size: 0.95rem;
-  color: #555;
+  color: var(--text-muted);
   margin-bottom: 6px;
+}
+
+/* ── Scroll Progress Bar ── */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, #7ee7ff, #a29bfe, #f4e04d);
+  z-index: 99999;
+  pointer-events: none;
+  transition: width 0.05s linear;
+  box-shadow: 0 0 8px rgba(126,231,255,0.7);
 }
 
 .view-work {
@@ -1101,7 +1208,7 @@ body.loaded .hero .view-work {
 /* Hero band layout (reference) - placed last to override earlier duplicates */
 header {
   /* show the star image as the header band background (image only) */
-  background: url("images/stars.jpeg") center/cover no-repeat;
+  background: url("images/stars.jpg") center/cover no-repeat;
   background-size: cover;
   padding: 48px 20px 28px;
   color: #fff;
@@ -1112,9 +1219,10 @@ header {
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 24px 20px 36px;
+  padding: 24px 20px 80px;
   gap: 24px;
   overflow: visible;
+  min-height: 85vh;
 }
 
 .hero .header-content {

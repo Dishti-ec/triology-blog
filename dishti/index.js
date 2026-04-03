@@ -829,4 +829,83 @@ document.addEventListener('DOMContentLoaded', () => {
   initOrbitSystem();
   initContactForm();
   initBlogSystem();
+  initScrollProgress();
+  initStickyNav();
+  initTypingEffect();
 });
+
+// ── Scroll Progress Bar ──
+function initScrollProgress() {
+  const bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = pct + '%';
+  }, { passive: true });
+}
+
+// ── Sticky Nav glass effect ──
+function initStickyNav() {
+  const nav = document.querySelector('nav');
+  if (!nav) return;
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+}
+
+// ── Typing Effect for hero subtitle ──
+function initTypingEffect() {
+  const el = document.getElementById('hero-subtitle');
+  if (!el) return;
+
+  const phrases = ['Code • Words • Curiosity', 'Builder • Dreamer • Explorer', 'Student of the Cosmos'];
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let deleting = false;
+  let paused = false;
+
+  // Create cursor
+  const cursor = document.createElement('span');
+  cursor.className = 'typing-cursor';
+  el.textContent = '';
+  el.appendChild(cursor);
+
+  function tick() {
+    const current = phrases[phraseIndex];
+
+    if (paused) {
+      paused = false;
+      deleting = true;
+      setTimeout(tick, 1800);
+      return;
+    }
+
+    if (!deleting) {
+      charIndex++;
+      el.textContent = current.slice(0, charIndex);
+      el.appendChild(cursor);
+      if (charIndex === current.length) {
+        paused = true;
+        setTimeout(tick, 100);
+      } else {
+        setTimeout(tick, 60);
+      }
+    } else {
+      charIndex--;
+      el.textContent = current.slice(0, charIndex);
+      el.appendChild(cursor);
+      if (charIndex === 0) {
+        deleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        setTimeout(tick, 400);
+      } else {
+        setTimeout(tick, 35);
+      }
+    }
+  }
+
+  // Start after hero animation delay
+  setTimeout(tick, 2600);
+}
