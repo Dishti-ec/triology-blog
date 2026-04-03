@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PokeDux</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; margin: 0; background: #f8f9fb; color: #1f2937; }
+    header { padding: 1.5rem 1rem; background: #e5e7eb; text-align: center; border-bottom: 1px solid #d1d5db; }
+    header h1 { margin: 0; font-size: 2rem; }
+    header p { margin: .5rem 0 0; font-size: 1rem; color: #4b5563; }
+    .controls { display: flex; justify-content: center; gap: .75rem; flex-wrap: wrap; margin: 1rem; }
+    .controls button { border: none; background: #2563eb; color: white; padding: .6rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600; }
+    .controls button:disabled { opacity: .6; cursor: default; }
+    #status { text-align: center; margin: .5rem 1rem; color: #4b5563; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; max-width: 1200px; margin: 1rem auto 3rem; padding: 0 1rem; }
+    .card { background: white; border-radius: 16px; box-shadow: 0 6px 12px rgba(15,23,42,.08); border: 1px solid #e5e7eb; padding: 1rem; }
+    .card img { width: 120px; height: 120px; object-fit: contain; display: block; margin: 0 auto .8rem; }
+    .card h2 { margin: .35rem 0 .15rem; font-size: 1.14rem; text-transform: capitalize; text-align: center; color: #1f2937; }
+    .card p { margin: .15rem 0; font-size: .9rem; color: #374151; text-align: center; line-height: 1.4; }
+    body.dark-mode {
+    background: black;
+    color: white;
+}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PokeDux</h1>
+    <p>A simple PokéDex with images and short info lines (1-2 lines each). Includes the first 252 Pokémon.</p>
+  </header>
+
+  <div class="controls">
+    <button id="loadBtn">Load 252 Pokémon</button>
+    <button id="clearBtn" disabled>Clear</button>
+  </div>
+  <div id="status">Press "Load 252 Pokémon" to get started.</div>
+
+  <div id="grid" class="grid"></div>
+
+  <script>
+    const loadBtn = document.getElementById('loadBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const status = document.getElementById('status');
+    const grid = document.getElementById('grid');
+
+    function createCard(pkm) {
+      const card = document.createElement('article');
+      card.className = 'card';
+
+      const img = document.createElement('img');
+      img.src = pkm.sprites.front_default || pkm.sprites.other['official-artwork'].front_default || 'https://via.placeholder.com/120?text=?';
+      img.alt = pkm.name + ' sprite';
+
+      const title = document.createElement('h2');
+      title.textContent = '#' + pkm.id + ' ' + pkm.name;
+
+      const line1 = document.createElement('p');
+      const types = pkm.types.map(function(t){ return t.type.name; }).join(', ');
+      line1.textContent = (pkm.height / 10) + 'm · ' + (pkm.weight / 10) + 'kg · Type: ' + types;
+
+      const line2 = document.createElement('p');
+      line2.textContent = 'HP ' + pkm.stats[0].base_stat + ', Attack ' + pkm.stats[1].base_stat + ', Speed ' + pkm.stats[5].base_stat;
+
+      card.appendChild(img);
+      card.appendChild(title);
+      card.appendChild(line1);
+      card.appendChild(line2);
+      return card;
+    }
+
+    function clearPokemon() {
+      grid.innerHTML = '';
+      status.textContent = 'Cleared. Press load to fetch again.';
+      clearBtn.disabled = true;
+      loadBtn.disabled = false;
+    }
+
+    function loadPokemon() {
+      loadBtn.disabled = true;
+      status.textContent = 'Loading 252 Pokémon...';
+
+      fetch('https://pokeapi.co/api/v2/pokemon?limit=252')
+        .then(function(response) {
+          if (response.ok) {
+            return response.json();
+          }
+          status.textContent = 'Could not load the list. Check internet and refresh.';
+          loadBtn.disabled = false;
+          return null; // stop next then
+        })
+        .then(function(data) {
+          if (!data) {
+            return; // no data, stop here
+          }
+          status.textContent = 'Got list. Now loading each Pokémon...';
+
+          data.results.forEach(function(pokemon, index) {
+            fetch(pokemon.url)
+              .then(function(res) {
+                if (res.ok) {
+                  return res.json();
+                }
+                status.textContent = 'Could not load ' + pokemon.name + '. Moving on...';
+                return null;
+              })
+              .then(function(pkmData) {
+                if (!pkmData) {
+                  return; // skip this one because details not available
+                }
+                var card = createCard(pkmData);
+                grid.appendChild(card);
+              })
+              .catch(function(err) {
+                // Only network-level errors end up here
+                console.log('Pokemon load error', pokemon.name, err);
+              });
+          });
+
+          clearBtn.disabled = false;
+          status.textContent = 'Good! Pokémon are being shown. Scroll down to view all.';
+        })
+        .catch(function(error) {
+          status.textContent = 'Error fetching data. Try again after a moment.';
+          loadBtn.disabled = false;
+          console.log(error);
+        });
+    }
+    loadBtn.addEventListener('click', function() {
+      if (grid.children.length === 0) {
+        loadPokemon();
+      }
+    });
+
+    clearBtn.addEventListener('click', clearPokemon);
+  </script>
+</body>
+</html>

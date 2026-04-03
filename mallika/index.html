@@ -1,1 +1,813 @@
-<h1>Mallika Page</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mallika | Dreaming Between Ocean & Fantany world</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            --secondary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(230, 230, 250, 0.7) 100%);
+            --accent-blue: #87ceeb;
+            --accent-purple: #dda0dd;
+            --accent-pink: #ffc0d9;
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+        }
+
+        /* Custom Cursor - Star Magic */
+        body, a, button, .contact-link, .card, .skill-bubble {
+            cursor: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 32 32"><polygon points="16,2 20,12 31,14 23,22 25,33 16,28 7,33 9,22 1,14 12,12" fill="%23ffb6c1" opacity="1"/><circle cx="16" cy="16" r="5" fill="%23ffc0cb" opacity="1"/></svg>') 20 6, auto !important;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            background: linear-gradient(180deg, #e8f4f8 0%, #f0e6ff 50%, #ffe6f0 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            cursor: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 32 32"><polygon points="16,2 20,12 31,14 23,22 25,33 16,28 7,33 9,22 1,14 12,12" fill="%23ffb6c1" opacity="1"/><circle cx="16" cy="16" r="5" fill="%23ffc0cb" opacity="1"/></svg>') 20 6, auto;
+        }
+
+        /* Subtle animated background elements */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(173, 216, 230, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(221, 160, 221, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 10% 10%, rgba(255,255,255,0.9) 2px, transparent 0),
+                radial-gradient(circle at 23% 32%, rgba(255,255,255,0.7) 2px, transparent 0),
+                radial-gradient(circle at 45% 15%, rgba(255,255,255,0.8) 2px, transparent 0),
+                radial-gradient(circle at 70% 25%, rgba(255,255,255,0.7) 2px, transparent 0),
+                radial-gradient(circle at 83% 72%, rgba(255,255,255,0.9) 2px, transparent 0);
+            background-size: 100% 100%;
+            animation: starBlink 2.5s infinite ease-in-out;
+            pointer-events: none;
+            z-index: -1;
+            mix-blend-mode: screen;
+        }
+
+        @keyframes starBlink {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-gradient);
+            padding: 10rem 2rem;
+            text-align: center;
+            box-shadow: 0 12px 40px rgba(173, 216, 230, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '✨ · 🌊 · ✨';
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            font-size: 1.3rem;
+            opacity: 0.5;
+            animation: float 5s ease-in-out infinite;
+            letter-spacing: 1rem;
+        }
+
+        h1 {
+            font-family: 'Brush Script MT', 'Lucida Calligraphy', cursive, serif;
+            font-size: 4.8rem;
+            color: #e75480;
+            margin-bottom: 0.5rem;
+            text-shadow: 3px 3px 15px rgba(255, 182, 193, 0.85);
+            position: relative;
+            z-index: 1;
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            font-family: 'Georgia', 'Garamond', serif;
+            font-size: 1.3rem;
+            color: #667eea;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 15px rgba(102, 126, 234, 0.25);
+            letter-spacing: 0.5px;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        nav a:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        nav a:hover::before {
+            opacity: 1;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: var(--card-gradient);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            animation: fadeInUp 0.8s ease-out;
+            transition: all 0.4s ease;
+        }
+
+        section:hover {
+            box-shadow: 0 15px 50px rgba(102, 126, 234, 0.18), 0 0 30px rgba(221, 160, 221, 0.1);
+            border-color: rgba(221, 160, 221, 0.5);
+        }
+
+        h2 {
+            font-family: 'Georgia', 'Garamond', serif;
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.4);
+            text-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+        }
+
+        p {
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 230, 250, 0.9) 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+            border: 1px solid rgba(221, 160, 221, 0.3);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 15px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            box-shadow: inset 0 0 20px rgba(102, 126, 234, 0.4), inset 0 0 40px rgba(221, 160, 221, 0.2);
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 245, 250, 0.95) 100%);
+            border-color: rgba(221, 160, 221, 0.4);
+        }
+
+        .card.hover-glow, .skill-bubble.hover-glow {
+            box-shadow: 0 0 12px rgba(255, 182, 193, 0.25);
+            border-color: #ffc0cb;
+            transition: box-shadow 0.25s ease, border-color 0.25s ease;
+            background: rgba(255, 255, 255, 0.92);
+        }
+
+        .card:hover::before,
+        .card:hover::after {
+            opacity: 0;
+        }
+
+        .card h3 {
+            font-family: 'Georgia', 'Garamond', serif;
+            color: #764ba2;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover h3 {
+            color: #667eea;
+            text-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.2) rotate(15deg);
+        }
+
+        /* About Section */
+        #about {
+            background: linear-gradient(135deg, rgba(235, 245, 255, 0.9) 0%, rgba(230, 250, 255, 0.9) 100%);
+            border: 1px solid rgba(170, 200, 230, 0.6);
+        }
+
+        /* Skills Section */
+        #skills {
+            background: linear-gradient(135deg, rgba(255, 228, 236, 0.45) 0%, rgba(231, 213, 255, 0.45) 100%);
+        }
+
+        /* Education Section */
+        #education {
+            background: linear-gradient(135deg, rgba(221, 160, 221, 0.4) 0%, rgba(230, 230, 250, 0.4) 100%);
+        }
+
+        /* Projects Section */
+        #projects {
+            background: linear-gradient(135deg, rgba(235, 220, 255, 0.5) 0%, rgba(245, 235, 255, 0.6) 100%);
+        }
+
+        /* Cloud-like skill boxes */
+        .skills-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            align-items: center;
+        }
+
+        .skill-bubble {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 240, 245, 0.95) 100%);
+            padding: 1.5rem 2rem;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.2);
+            border: 2px solid rgba(255, 192, 203, 0.5);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-align: center;
+            cursor: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 32 32"><polygon points="16,2 20,12 31,14 23,22 25,33 16,28 7,33 9,22 1,14 12,12" fill="%23ffb6c1" opacity="1"/><circle cx="16" cy="16" r="5" fill="%23ffc0cb" opacity="1"/></svg>') 20 6, auto;
+            position: relative;
+            overflow: hidden;
+            min-width: 150px;
+        }
+
+        .skill-bubble::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            box-shadow: inset 0 0 25px rgba(255, 105, 180, 0.3);
+            pointer-events: none;
+        }
+
+        .skill-bubble:hover {
+            transform: translateY(-8px) scale(1.08);
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.35);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(255, 220, 230, 1) 100%);
+            border-color: rgba(255, 105, 180, 0.8);
+        }
+
+        .skill-bubble:hover::before {
+            opacity: 1;
+        }
+
+        .skill-bubble h4 {
+            color: #ff69b4;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+        }
+
+        .skill-bubble .skill-icon {
+            font-size: 1.8rem;
+            transition: all 0.4s ease;
+        }
+
+        .skill-bubble:hover .skill-icon {
+            transform: scale(1.2) rotate(-10deg);
+        }
+
+        /* Timeline Education Section */
+        .timeline-simple {
+            position: relative;
+            margin: 1.5rem 0;
+            padding-left: 1.2rem;
+            border-left: 3px solid rgba(102, 126, 234, 0.4);
+        }
+
+        .timeline-simple::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 0 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .timeline-event {
+            margin: 0.9rem 0;
+            padding: 0.35rem 0.65rem;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(173, 216, 230, 0.5);
+            color: #1f2937;
+            position: relative;
+        }
+
+        .timeline-event::before {
+            content: '';
+            position: absolute;
+            left: -11px;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #764ba2;
+        }
+
+        .timeline-event .timeline-year {
+            font-weight: 700;
+            color: #4338ca;
+            margin-right: 0.5rem;
+        }
+
+        .timeline-note {
+            margin-left: 1.2rem;
+            background: rgba(221, 160, 221, 0.15);
+            border-color: rgba(221, 160, 221, 0.4);
+            font-size: 0.92rem;
+            color: #4b5563;
+        }
+
+        /* Pink Stars Decoration */
+        .star-pink-small {
+            display: inline-block;
+            font-size: 1.2rem;
+            color: #ff69b4;
+            margin: 0 0.3rem;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        .star-pink-medium {
+            display: inline-block;
+            font-size: 1.5rem;
+            color: #ff1493;
+            margin: 0 0.5rem;
+            animation: twinkle 4s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Education Section */
+
+
+        /* Contact Section */
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-weight: 600;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .contact-link:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.6), 0 0 25px rgba(221, 160, 221, 0.4);
+        }
+
+        .contact-link:hover::before {
+            left: 100%;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(221, 160, 221, 0.1) 100%);
+            border-top: 1px solid rgba(102, 126, 234, 0.2);
+            margin-top: 4rem;
+            color: #667eea;
+            font-size: 0.95rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(221, 160, 221, 0.6);
+            }
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .tagline {
+                font-size: 1rem;
+            }
+            nav ul {
+                gap: 0.5rem;
+            }
+            nav a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .container {
+                padding: 1rem;
+            }
+            section {
+                padding: 1.5rem;
+                margin: 2rem 0;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-links {
+                flex-direction: column;
+            }
+            .contact-link {
+                width: 100%;
+                text-align: center;
+            }
+            header::after {
+                font-size: 1.2rem;
+            }
+            .skills-cloud {
+                gap: 1rem;
+            }
+            .skill-bubble {
+                min-width: 120px;
+                padding: 1rem 1.5rem;
+            }
+            /* responsiveness remains for main sections */
+            .timeline-simple {
+                margin: 1.2rem 0;
+            }
+            .timeline-event {
+                padding: 0.3rem 0.55rem;
+            }
+            @media (max-width: 480px) {
+                h1 { font-size: 2rem; }
+                .tagline { font-size: 0.9rem; }
+                h2 { font-size: 1.3rem; }
+                .card h3 { font-size: 1.2rem; }
+                header { padding: 2rem 1rem; }
+                .skills-cloud { gap: 0.8rem; }
+                .skill-bubble { min-width: 100px; padding: 0.8rem 1rem; font-size: 0.85rem; }
+                .skill-bubble h4 { font-size: 0.8rem; }
+                .skill-bubble .skill-icon { font-size: 1.5rem; }
+                .timeline-event .timeline-year { font-size: 0.88rem; }
+            }
+        </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#interests">Interests</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><button id="theme-toggle">🌙</button></li>
+        </ul>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <h1>Mallika</h1>
+        <p class="tagline">Dreaming between the ocean and the fairy lights ✨🌊</p>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- About Section -->
+        <section id="about">
+            <h2>About Me</h2>
+            <p>
+                Welcome to my first dreamy website! I'm Mallika, a creative soul who finds inspiration in the gentle waves of the ocean and the twinkling magic of starlit nights. I believe in the power of imagination, nature's beauty, and the endless possibilities that life offers.
+            </p>
+            <p>
+                 I'm doing btech computer science and engineering at GSFC University, more interested in coding and cybersecurity. By night, I'm lost in the realm of dreams and wonder. This digital space is where I share my journey, my passions, and the beautiful things I've discovered along the way.
+            </p>
+        </section>
+
+        <!-- Interests Section -->
+        <section id="interests">
+            <h2>Interests <span class="star-pink-small">🌟</span></h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3><span class="card-icon">🌊</span> Ocean Exploration</h3>
+                    <p>Diving into the mysteries of the deep sea, studying marine life, and understanding the ecosystems that make our oceans so magical and vibrant.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="card-icon">✨</span> Fantasy & Fairy Tales</h3>
+                    <p>Lost in enchanted forests, magical realms, and timeless stories that remind us to believe in wonder and never lose our sense of magic.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="card-icon">📖</span> Storytelling</h3>
+                    <p>Crafting narratives that transport readers to imaginative worlds, blending ethereal themes with emotional depth and genuine human connection.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="card-icon">🌙</span> Astronomy</h3>
+                    <p>Gazing at the stars and understanding the cosmos, finding solace and inspiration in the vast universe and its infinite possibilities.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="card-icon">🌸</span> Nature & Gardening</h3>
+                    <p>Cultivating gardens filled with delicate flowers, herbs, and magical plants that bring life, beauty, and botanical wonder to everyday spaces.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="card-icon">🎮</span> Animes </h3>
+                    <p>One of my favorite hobbies is watching animes. My favorite series is Pokémon, and this is my live project with a PokeDex web app; check it at <a href="pokedex.html" target="_blank" rel="noopener">PokeDux</a>. I built it to learn JavaScript API fetch and UI cards.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2>Skills <span class="star-pink-small">✨</span></h2>
+            <div class="skills-cloud">
+                <div class="skill-bubble">
+                    <div class="skill-icon">💻</div>
+                    <h4>Web Design & Development</h4>
+                </div>
+                <div class="skill-bubble">
+                    <div class="skill-icon">💡</div>
+                    <h4>Coding</h4>
+                </div>
+                <div class="skill-bubble">
+                    <div class="skill-icon">🎯</div>
+                    <h4>Business Creativity</h4>
+                </div>
+                <div class="skill-bubble">
+                    <div class="skill-icon">📈</div>
+                    <h4>Data Analysis</h4>
+                </div>
+                <div class="skill-bubble">
+                    <div class="skill-icon">🔐</div>
+                    <h4>Network Security</h4>
+                </div>
+                <div class="skill-bubble">
+                    <div class="skill-icon">🗣️</div>
+                    <h4>Communication</h4>
+                </div>
+                <div class="skill-bubble">
+                    <div class="skill-icon">🧠</div>
+                    <h4>Problem Solving</h4>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education">
+            <h2>Education <span class="star-pink-medium">⭐</span></h2>
+            <div class="timeline-simple">
+                <div class="timeline-event"><span class="timeline-year">2011 April </span> Joined D.R. Amin </div>
+                <div class="timeline-event"><span class="timeline-year">2023 March </span> 10th completed</div>
+                <div class="timeline-event timeline-note">2023 cybersecurity course completed from IBM</div>
+                <div class="timeline-event"><span class="timeline-year">2023 April </span> Joined GVHS</div>
+                <div class="timeline-event timeline-note">2025 psychology course completed from Coursera</div>
+                <div class="timeline-event"><span class="timeline-year">2025 March </span> 12th completed</div>
+                 <div class="timeline-event timeline-note">  cryptography course completed from coursera</div>
+                <div class="timeline-event"><span class="timeline-year">2025 July</span> Joined GSFC University</div>
+                <div class="timeline-event timeline-note">2026 network security course completed from Udemy</div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2>Projects <span class="star-pink-small">⭐</span></h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3><span class="card-icon">🌐</span> Enchanted Portfolio</h3>
+                    <p>A dreamy portfolio website showcasing creative work with interactive animations and a soothing oceanic theme.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="card-icon">🎮</span> <a href="pokedex.html" target="_blank" rel="noopener" style="color:inherit; text-decoration:none;">PokeDux (Pokédex Project)</a></h3>
+                    <p>A Pokémon web project: <a href="pokedex.html" target="_blank" rel="noopener">Open PokeDux</a> - loads 252 Pokémon with images + short info.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Get In Touch</h2>
+            <p>
+                I'd love to hear from you! Whether you want to collaborate, chat about shared interests, or just say hello, feel free to reach out. Let's create some magic together! ✨
+            </p>
+            <div class="contact-links">
+                <a href="mailto:nagamallika.kuchibhotla@gmail.com" class="contact-link">📧 Email Me</a>
+                <a href="https://www.linkedin.com/in/nagamallika-kuchibhotla-0403aa376/" target="_blank" class="contact-link">💼 LinkedIn</a>
+                <a href="https://instagram.com" target="_blank" class="contact-link">📷 Instagram</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Mallika | Dreaming between the ocean and the fairy lights ✨🌊</p>
+        <p>Made with 💜 and a sprinkle of fairy dust</p>
+    </footer>
+
+    <script>
+        // Smooth up-down scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Parallax header movement on scroll
+        window.addEventListener('scroll', function() {
+            var header = document.querySelector('header');
+            var scrollY = window.scrollY;
+            header.style.backgroundPosition = '0 ' + (scrollY * 0.5) + 'px';
+        });
+
+        // Light glow class on hover for cards and bubbles
+        document.querySelectorAll('.card, .skill-bubble').forEach(function(el) {
+            el.addEventListener('mouseenter', function() {
+                this.classList.add('hover-glow');
+            });
+            el.addEventListener('mouseleave', function() {
+                this.classList.remove('hover-glow');
+            });
+        });
+        </script>
+       <script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    const btn = document.getElementById("theme-toggle");
+
+    btn.onclick = function() {
+        document.body.classList.toggle("dark-mode");
+    };
+
+});
+</script>
+};
+</body>
+</html>
