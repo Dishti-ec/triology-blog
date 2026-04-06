@@ -1,130 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inside Palak's Puzzle Mind</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My College Journey – Portfolio Blog</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
 </head>
 <body>
-    <!-- Moving Puzzle Piece -->
-    <div id="moving-puzzle-piece"></div>
-
-    <!-- Floating Side Quest Button -->
-    <button id="side-quest-btn" aria-label="Side Quest">🧩 Side Quest</button>
-    <div id="side-quest-popup" class="hidden">
-        <div class="popup-content">
-            <span id="close-popup">&times;</span>
-            <h3>Side Quest</h3>
-            <div id="side-quest-game"></div>
-        </div>
+  <div class="grid-bg"></div>
+  <div class="journal-lines-bg"></div>
+  <div class="satin-ribbon"></div>
+  <header class="journal-hero">
+    <div class="hero-content">
+      <h1 class="journal-title ecosmith" >Palak's Journal</h1>
+      <p class="journal-intro ecosmith" style="text-align: center;">Welcome to my personal journal. Here, every page is a memory, every note a lesson, and every photo a piece of my story.</p>
+      <span class="sticky-flag sticky-blue ecosmith" style="left: 60%; top: 18px;">Start your own story!</span>
+      <span class="sticky-flag sticky-pink ecosmith" style="left: 10%; top: 80px; transform: rotate(7deg);">Dream big!</span>
+      <span class="stationery paperclip" style="left: 7%; top: 30px;"></span>
+      <span class="stationery pencil" style="right: 8%; top: 60px;"></span>
     </div>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="floating-pieces"></div>
-        <h1>Welcome to Palak’s Brain</h1>
-        <h2>A place where puzzles, patterns, and logic come together.</h2>
-        <p>Hi, I'm Palak! I love games and puzzles that challenge my mind and help me grow as a logical thinker. Join me on a playful journey through the world of logic, strategy, and fun!</p>
-    </section>
-
-    <!-- Intro Section -->
-    <section class="section intro" id="intro">
-        <h2>Why I Love Puzzles</h2>
-        <ul>
-            <li>Logical thinking</li>
-            <li>Pattern recognition</li>
-            <li>Problem solving</li>
-            <li>Focus</li>
-        </ul>
-        <p>Puzzles and strategy games are more than just fun—they sharpen the mind, boost creativity, and teach us to see the world in new ways.</p>
-    </section>
-
-    <!-- Rubik's Cube Section -->
-    <section class="section cube" id="rubiks-cube">
-        <h2>Rubik’s Cube – The Ultimate Logic Toy</h2>
-        <p>The Rubik’s Cube is a colorful 3D puzzle that tests your memory and spatial thinking. Solving it is like untangling a knot in your mind!</p>
-        <div id="cube-game-container">
-            <canvas id="rubiks-cube-canvas" width="240" height="240" style="background:#23234a;border-radius:12px;box-shadow:0 2px 8px #a259ff33;"></canvas>
-            <div class="cube-controls">
-                <button id="cube-rotate-left">&#8592; Left</button>
-                <button id="cube-rotate-right">Right &#8594;</button>
-                <button id="cube-rotate-up">&#8593; Up</button>
-                <button id="cube-rotate-down">Down &#8595;</button>
-                <button id="cube-reset">Reset</button>
-            </div>
-        </div>
-        <p>Try to solve the cube by rotating it! It helps improve memory, patience, and the ability to visualize solutions.</p>
-    </section>
-
-    <!-- Chess Section -->
-    <section class="section chess" id="chess">
-        <h2>Chess – Strategy in Motion</h2>
-        <p>Chess is a classic game of strategy and foresight. Every move counts, and every piece has a purpose. It’s the ultimate test of planning ahead!</p>
-        <div id="chess-game-container">
-            <div id="chessboard"></div>
-            <div class="chess-controls">
-                <button id="chess-reset">Reset</button>
-            </div>
-            <div id="chess-message"></div>
-        </div>
-        <p>Try to checkmate the black king in one move!</p>
-    </section>
-
-    <!-- Puzzle Piece Section -->
-    <section class="section puzzle-piece" id="puzzle-piece">
-        <h2>Puzzle Pieces – Seeing the Bigger Picture</h2>
-        <p>Solving puzzles trains the brain to spot patterns and connect the dots. Every piece matters!</p>
-        <div id="puzzle-game-container">
-            <!-- Draggable Puzzle Game will be rendered here -->
-        </div>
-    </section>
-
-    <!-- Riddle Section -->
-    <section class="section riddles" id="riddles">
-        <h2>Riddles – Thinking Outside the Box</h2>
-        <p>Riddles are fun brain teasers that encourage creative, lateral thinking. Can you solve these?</p>
-        <div class="riddle-list">
-            <div class="riddle">
-                <p>What has keys but can’t open locks?</p>
-                <input type="text" class="riddle-input" placeholder="Your answer...">
-                <button class="riddle-check">Check</button>
-                <span class="riddle-feedback"></span>
-            </div>
-            <div class="riddle">
-                <p>I speak without a mouth and hear without ears. What am I?</p>
-                <input type="text" class="riddle-input" placeholder="Your answer...">
-                <button class="riddle-check">Check</button>
-                <span class="riddle-feedback"></span>
-            </div>
-            <div class="riddle">
-                <p>The more you take, the more you leave behind. What are they?</p>
-                <input type="text" class="riddle-input" placeholder="Your answer...">
-                <button class="riddle-check">Check</button>
-                <span class="riddle-feedback"></span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Final Section -->
-    <section class="section final" id="final">
-        <h2>The Puzzle Never Ends</h2>
-        <p>Puzzles and logical challenges are a reflection of how I love exploring ideas and solving problems. The journey is endless, and every challenge is a new adventure!</p>
-        <div class="icons">
-            <span title="Puzzles">🧩</span>
-            <span title="Logic">🧠</span>
-            <span title="Curiosity">🔍</span>
-            <span title="Learning">📚</span>
-        </div>
-        <div id="final-puzzle-slot"></div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        Still solving bigger puzzles every day.
-    </footer>
-
-    <script src="script.js"></script>
+  </header>
+  <main class="journal-main">
+    <div class="journal-entry">
+      <div class="journal-photo-block">
+        <img class="journal-photo" src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="My First Tech Event" />
+        <span class="photo-tape tape-blue"></span>
+        <span class="photo-tape tape-yellow"></span>
+        <span class="stationery pushpin" style="left: 10px; top: -18px;"></span>
+      </div>
+      <div class="journal-text-block">
+        <h2 class="ecosmith">My First Tech Event</h2>
+        <p class="ecosmith">Stepping into a world of innovation, I attended my first tech event, feeling both nervous and excited. It was the spark that ignited my passion for technology.</p>
+        <span class="sticky-flag sticky-yellow ecosmith" style="left: 60%; top: 10px;">Oh, that changed me!</span>
+        <a href="blog1.html" class="btn">Read Full Story</a>
+      </div>
+    </div>
+    <div class="journal-entry">
+      <div class="journal-photo-block">
+        <img class="journal-photo" src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=600&q=80" alt="The Day I Presented" />
+        <span class="photo-tape tape-pink"></span>
+        <span class="photo-tape tape-green"></span>
+        <span class="stationery pencil" style="right: 0; top: 60px;"></span>
+      </div>
+      <div class="journal-text-block">
+        <h2 class="ecosmith">The Day I Presented</h2>
+        <p class="ecosmith">Standing before an audience, I shared my ideas for the first time. The experience taught me courage and the value of my own voice.</p>
+        <span class="sticky-flag sticky-green ecosmith" style="left: 55%; top: 10px;">Nervous, but I did it!</span>
+        <a href="blog2.html" class="btn">Read Full Story</a>
+      </div>
+    </div>
+    <div class="journal-entry">
+      <div class="journal-photo-block">
+        <img class="journal-photo" src="https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=600&q=80" alt="Learning Beyond Classroom" />
+        <span class="photo-tape tape-blue"></span>
+        <span class="photo-tape tape-pink"></span>
+        <span class="stationery paperclip" style="left: 0; top: 10px;"></span>
+      </div>
+      <div class="journal-text-block">
+        <h2 class="ecosmith">Learning Beyond Classroom</h2>
+        <p class="ecosmith">Some of my most valuable lessons came from experiences outside the classroom—collaborating, failing, and growing with peers.</p>
+        <span class="sticky-flag sticky-pink ecosmith" style="left: 60%; top: 10px;">Best days ever!</span>
+        <a href="blog3.html" class="btn">Read Full Story</a>
+      </div>
+    </div>
+    <span class="stationery eraser" style="left: 3%; bottom: 40px;"></span>
+    <span class="stationery ruler" style="right: 2%; bottom: 30px;"></span>
+  </main>
+  <footer>
+    <p>&copy; 2026 My College Journey. Crafted with care.</p>
+  </footer>
 </body>
 </html>
