@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mallika | Dreaming Between Ocean & Fantany world</title>
-    
     <style>
         * {
             margin: 0;
@@ -22,16 +21,13 @@
             --text-dark: #2c3e50;
             --text-light: #ecf0f1;
         }
-
         /* Custom Cursor - Star Magic */
         body, a, button, .contact-link, .card, .skill-bubble {
             cursor: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 32 32"><polygon points="16,2 20,12 31,14 23,22 25,33 16,28 7,33 9,22 1,14 12,12" fill="%23ffb6c1" opacity="1"/><circle cx="16" cy="16" r="5" fill="%23ffc0cb" opacity="1"/></svg>') 20 6, auto !important;
         }
-
         html {
             scroll-behavior: smooth;
         }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: var(--text-dark);
@@ -41,7 +37,6 @@
             overflow-x: hidden;
             cursor: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 32 32"><polygon points="16,2 20,12 31,14 23,22 25,33 16,28 7,33 9,22 1,14 12,12" fill="%23ffb6c1" opacity="1"/><circle cx="16" cy="16" r="5" fill="%23ffc0cb" opacity="1"/></svg>') 20 6, auto;
         }
-
         /* Subtle animated background elements */
         body::before {
             content: '';
@@ -56,7 +51,6 @@
             pointer-events: none;
             z-index: -1;
         }
-
         body::after {
             content: '';
             position: fixed;
@@ -77,21 +71,102 @@
             mix-blend-mode: screen;
         }
 
+        /* Fairy Sparkle Tiny Stars */
+        .sparkles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .fairy-sparkle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 0 10px 3px rgba(255, 255, 255, 1), 0 0 20px 5px rgba(173, 216, 230, 0.6);
+            animation: fallingStar 8s linear infinite;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .sparkles .fairy-sparkle:nth-child(1) { top: -5%; left: 22%; animation-delay: 0s; }
+        .sparkles .fairy-sparkle:nth-child(2) { top: -10%; left: 12%; animation-delay: 0.8s; }
+        .sparkles .fairy-sparkle:nth-child(3) { top: -8%; left: 45%; animation-delay: 1.4s; }
+        .sparkles .fairy-sparkle:nth-child(4) { top: -3%; left: 70%; animation-delay: 2s; }
+        .sparkles .fairy-sparkle:nth-child(5) { top: -6%; left: 55%; animation-delay: 2.6s; }
+        .sparkles .fairy-sparkle:nth-child(6) { top: -7%; left: 33%; animation-delay: 3.2s; }
+        .sparkles .fairy-sparkle:nth-child(7) { top: -4%; left: 80%; animation-delay: 3.8s; }
+        .sparkles .fairy-sparkle:nth-child(8) { top: -9%; left: 18%; animation-delay: 4.4s; }
+        .sparkles .fairy-sparkle:nth-child(9) { top: -2%; left: 25%; animation-delay: 5s; }
+        .sparkles .fairy-sparkle:nth-child(10) { top: -5%; left: 58%; animation-delay: 5.6s; }
+        .sparkles .fairy-sparkle:nth-child(11) { top: -1%; left: 7%; animation-delay: 6.2s; }
+        .sparkles .fairy-sparkle:nth-child(12) { top: -8%; left: 65%; animation-delay: 6.8s; }
+        .sparkles .fairy-sparkle:nth-child(13) { top: -4%; left: 38%; animation-delay: 7.4s; }
+        .sparkles .fairy-sparkle:nth-child(14) { top: -6%; left: 53%; animation-delay: 8s; }
+        .sparkles .fairy-sparkle:nth-child(15) { top: -10%; left: 90%; animation-delay: 8.6s; }
+        .sparkles .fairy-sparkle:nth-child(16) { top: -3%; left: 12%; animation-delay: 9.2s; }
+        .sparkles .fairy-sparkle:nth-child(2) { top: 18%; right: 16%; animation-delay: 0.3s; }
+        .sparkles .fairy-sparkle:nth-child(3) { top: 28%; left: 40%; animation-delay: 0.6s; }
+        .sparkles .fairy-sparkle:nth-child(4) { top: 36%; right: 30%; animation-delay: 0.9s; }
+        .sparkles .fairy-sparkle:nth-child(5) { top: 14%; left: 55%; animation-delay: 1.2s; }
+        .sparkles .fairy-sparkle:nth-child(6) { top: 24%; left: 70%; animation-delay: 1.5s; }
+        .sparkles .fairy-sparkle:nth-child(7) { top: 22%; right: 35%; animation-delay: 1.8s; }
+        .sparkles .fairy-sparkle:nth-child(8) { top: 42%; left: 10%; animation-delay: 2.1s; }
+        .sparkles .fairy-sparkle:nth-child(9) { top: 32%; right: 20%; animation-delay: 2.4s; }
+        .sparkles .fairy-sparkle:nth-child(10) { top: 45%; left: 55%; animation-delay: 2.7s; }
+        .sparkles .fairy-sparkle:nth-child(11) { top: 10%; left: 10%; animation-delay: 3s; }
+        .sparkles .fairy-sparkle:nth-child(12) { top: 8%; right: 25%; animation-delay: 3.3s; }
+        .sparkles .fairy-sparkle:nth-child(13) { top: 50%; left: 30%; animation-delay: 3.6s; }
+        .sparkles .fairy-sparkle:nth-child(14) { top: 60%; right: 15%; animation-delay: 3.9s; }
+        .sparkles .fairy-sparkle:nth-child(15) { top: 35%; left: 15%; animation-delay: 4.2s; }
+        .sparkles .fairy-sparkle:nth-child(16) { top: 55%; right: 50%; animation-delay: 4.5s; }
+
+        @keyframes fallingStar {
+            0% {
+                transform: translateY(0) scale(0.8);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.9;
+                transform: translateY(5vh) scale(1.1);
+            }
+            60% {
+                opacity: 1;
+                transform: translateY(65vh) scale(1.1);
+            }
+            90% {
+                opacity: 0.35;
+                transform: translateY(95vh) scale(0.8);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(110vh) scale(0.5);
+            }
+        }
         @keyframes starBlink {
             0%, 100% { opacity: 0.2; }
             50% { opacity: 1; }
         }
-
         /* Header */
         header {
             background: var(--primary-gradient);
-            padding: 10rem 2rem;
+            padding: 6rem 2rem 6rem; /* balanced padding for true centering */
+            min-height: 90vh; /* fill most of viewport so title gets full page attention */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
             box-shadow: 0 12px 40px rgba(173, 216, 230, 0.25);
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
-
         header::after {
             content: '✨ · 🌊 · ✨';
             position: absolute;
@@ -103,18 +178,33 @@
             animation: float 5s ease-in-out infinite;
             letter-spacing: 1rem;
         }
-
         h1 {
             font-family: 'Brush Script MT', 'Lucida Calligraphy', cursive, serif;
-            font-size: 4.8rem;
+            font-size: 6rem; /* bigger name text */
             color: #e75480;
-            margin-bottom: 0.5rem;
+            margin: 0.2rem auto 0.5rem;
             text-shadow: 3px 3px 15px rgba(255, 182, 193, 0.85);
             position: relative;
             z-index: 1;
             letter-spacing: 2px;
+            text-align: center;
+            width: max-content;
         }
 
+        .tagline {
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 6rem 1.5rem 4rem;
+                min-height: 70vh;
+            }
+            h1 {
+                font-size: 4.2rem;
+            }
+        }
         .tagline {
             font-family: 'Georgia', 'Garamond', serif;
             font-size: 1.3rem;
@@ -125,7 +215,6 @@
             text-shadow: 0 0 15px rgba(102, 126, 234, 0.25);
             letter-spacing: 0.5px;
         }
-
         /* Navigation */
         nav {
             background: rgba(255, 255, 255, 0.8);
@@ -136,7 +225,6 @@
             z-index: 100;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
-
         nav ul {
             list-style: none;
             display: flex;
@@ -144,7 +232,6 @@
             gap: 2rem;
             flex-wrap: wrap;
         }
-
         nav a {
             text-decoration: none;
             color: #667eea;
@@ -155,34 +242,29 @@
             position: relative;
             overflow: hidden;
         }
-
         nav a::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--primary-gradient);
             border-radius: 20px;
             z-index: -1;
             opacity: 0;
             transition: opacity 0.4s ease;
         }
-
         nav a:hover {
             color: white;
             transform: translateY(-3px);
         }
-
         nav a:hover::before {
             opacity: 1;
         }
-
         /* Main Container */
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 2rem;
         }
-
         section {
             margin: 3rem 0;
             padding: 2rem;
@@ -194,7 +276,6 @@
             animation: fadeInUp 0.8s ease-out;
             transition: all 0.4s ease;
         }
-
         section:hover {
             box-shadow: 0 15px 50px rgba(102, 126, 234, 0.18), 0 0 30px rgba(221, 160, 221, 0.1);
             border-color: rgba(221, 160, 221, 0.5);
@@ -215,7 +296,6 @@
             color: var(--text-dark);
             margin-bottom: 1rem;
         }
-
         /* Cards Grid */
         .cards-grid {
             display: grid;
@@ -223,7 +303,6 @@
             gap: 2rem;
             margin-top: 2rem;
         }
-
         .card {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 230, 250, 0.9) 100%);
             padding: 2rem;
@@ -235,7 +314,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .card::before {
             content: '';
             position: absolute;
@@ -248,8 +326,7 @@
             transition: opacity 0.5s ease;
             pointer-events: none;
         }
-
-        .card::after {
+        .card::after{
             content: '';
             position: absolute;
             inset: 0;
@@ -259,26 +336,22 @@
             box-shadow: inset 0 0 20px rgba(102, 126, 234, 0.4), inset 0 0 40px rgba(221, 160, 221, 0.2);
             pointer-events: none;
         }
-
         .card:hover {
             transform: translateY(-8px);
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 245, 250, 0.95) 100%);
             border-color: rgba(221, 160, 221, 0.4);
         }
-
         .card.hover-glow, .skill-bubble.hover-glow {
             box-shadow: 0 0 12px rgba(255, 182, 193, 0.25);
             border-color: #ffc0cb;
             transition: box-shadow 0.25s ease, border-color 0.25s ease;
             background: rgba(255, 255, 255, 0.92);
         }
-
         .card:hover::before,
         .card:hover::after {
             opacity: 0;
         }
-
         .card h3 {
             font-family: 'Georgia', 'Garamond', serif;
             color: #764ba2;
@@ -289,42 +362,34 @@
             gap: 0.8rem;
             transition: all 0.3s ease;
         }
-
         .card:hover h3 {
             color: #667eea;
             text-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
         }
-
         .card-icon {
             font-size: 1.8rem;
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-
         .card:hover .card-icon {
             transform: scale(1.2) rotate(15deg);
         }
-
         /* About Section */
         #about {
             background: linear-gradient(135deg, rgba(235, 245, 255, 0.9) 0%, rgba(230, 250, 255, 0.9) 100%);
             border: 1px solid rgba(170, 200, 230, 0.6);
         }
-
         /* Skills Section */
         #skills {
             background: linear-gradient(135deg, rgba(255, 228, 236, 0.45) 0%, rgba(231, 213, 255, 0.45) 100%);
         }
-
         /* Education Section */
         #education {
             background: linear-gradient(135deg, rgba(221, 160, 221, 0.4) 0%, rgba(230, 230, 250, 0.4) 100%);
         }
-
         /* Projects Section */
         #projects {
             background: linear-gradient(135deg, rgba(235, 220, 255, 0.5) 0%, rgba(245, 235, 255, 0.6) 100%);
         }
-
         /* Cloud-like skill boxes */
         .skills-cloud {
             display: flex;
@@ -467,10 +532,7 @@
                 opacity: 1;
             }
         }
-
         /* Education Section */
-
-
         /* Contact Section */
         .contact-links {
             display: flex;
@@ -513,7 +575,6 @@
         .contact-link:hover::before {
             left: 100%;
         }
-
         /* Footer */
         footer {
             text-align: center;
@@ -524,7 +585,6 @@
             color: #667eea;
             font-size: 0.95rem;
         }
-
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -624,16 +684,34 @@
         <ul>
             <li><a href="#about">About</a></li>
             <li><a href="#interests">Interests</a></li>
+            <li><a href="#travel-diaries">Travel Diaries</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#education">Education</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><button id="theme-toggle">🌙</button></li>
         </ul>
     </nav>
 
     <!-- Header -->
     <header>
+        <div class="sparkles">
+            <div class="fairy-sparkle"></div>
+            <div class="fairy-sparkle"></div>
+            <div class="fairy-sparkle"></div>
+            <div class="fairy-sparkle"></div>
+            <div class="fairy-sparkle"></div>
+            <div class="fairy-sparkle"></div>
+            <div class="fairy-sparkle"></div>
+            <div class="fairy-sparkle"></div>
+            <div class="fairy-sparkle"></div>
+            <div class="fairy-sparkle"></div>
+            <div class="fairy-sparkle"></div>
+            <div class="fairy-sparkle"></div>
+            <div class="fairy-sparkle"></div>
+            <div class="fairy-sparkle"></div>
+            <div class="fairy-sparkle"></div>
+            <div class="fairy-sparkle"></div>
+        </div>
         <h1>Mallika</h1>
         <p class="tagline">Dreaming between the ocean and the fairy lights ✨🌊</p>
     </header>
@@ -679,6 +757,15 @@
                     <h3><span class="card-icon">🎮</span> Animes </h3>
                     <p>One of my favorite hobbies is watching animes. My favorite series is Pokémon, and this is my live project with a PokeDex web app; check it at <a href="pokedex.html" target="_blank" rel="noopener">PokeDux</a>. I built it to learn JavaScript API fetch and UI cards.</p>
                 </div>
+            </div>
+        </section>
+
+        <!-- Travel Diaries Section -->
+        <section id="travel-diaries">
+            <h2>My Main Travel Diaries <span class="star-pink-small">🌍</span></h2>
+            <p>Traveling is my passion! From the majestic forts of Rajasthan to the serene beaches of coastal India, each journey fills my heart with wonder and creates unforgettable memories. I love exploring new places, immersing in diverse cultures, and capturing the beauty of our world. Dive into my travel adventures from 2018 to 2026 – a chronicle of wanderlust and discovery!</p>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="travel-diaries.html" target="_blank" rel="noopener" class="contact-link" style="display: inline-block; padding: 1rem 2rem; background: var(--primary-gradient); color: white; text-decoration: none; border-radius: 25px; box-shadow: 0 5px 15px rgba(173, 216, 230, 0.3); transition: all 0.3s;">Explore My Travel Diaries 🌊</a>
             </div>
         </section>
 
@@ -796,18 +883,7 @@
                 this.classList.remove('hover-glow');
             });
         });
-        </script>
-       <script>
-document.addEventListener("DOMContentLoaded", function() {
-
-    const btn = document.getElementById("theme-toggle");
-
-    btn.onclick = function() {
-        document.body.classList.toggle("dark-mode");
-    };
-
-});
-</script>
 };
+</script>
 </body>
 </html>

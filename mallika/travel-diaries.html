@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mallika's Travel Diaries | Ocean Adventures</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --beach-gradient: linear-gradient(to bottom, #81d4fa 0%, #0277bd 100%); /* Slightly darker baby blue to deep sea */
+            --fairy-pink: #ffb6c1;
+            --fairy-purple: #dda0dd;
+            --text-light: #ffffff;
+            --text-dark: #2c3e50;
+            --sand-color: #f4e4bc;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-light);
+            background: var(--beach-gradient);
+            background-attachment: fixed;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Beach elements */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            animation: waveFlow 10s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Shells */
+        .shell {
+            position: fixed;
+            color: #f5f5dc;
+            animation: shellFloat 20s ease-in-out infinite;
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        .shell:nth-child(1) { content: '🐚'; font-size: 1.5rem; top: 15%; left: 5%; animation-delay: 0s; }
+        .shell:nth-child(2) { content: '🦪'; font-size: 2rem; top: 25%; right: 10%; animation-delay: 3s; }
+        .shell:nth-child(3) { content: '🐚'; font-size: 1rem; top: 35%; left: 15%; animation-delay: 6s; }
+        .shell:nth-child(4) { content: '🦪'; font-size: 2.5rem; top: 45%; right: 5%; animation-delay: 9s; }
+        .shell:nth-child(5) { content: '🐚'; font-size: 1.2rem; top: 55%; left: 25%; animation-delay: 12s; }
+        .shell:nth-child(6) { content: '🦪'; font-size: 1.8rem; top: 65%; right: 20%; animation-delay: 15s; }
+        .shell:nth-child(7) { content: '🐚'; font-size: 1.3rem; top: 75%; left: 10%; animation-delay: 18s; }
+        .shell:nth-child(8) { content: '🦪'; font-size: 2.2rem; top: 85%; right: 15%; animation-delay: 21s; }
+        .shell:nth-child(9) { content: '🐚'; font-size: 1.6rem; top: 20%; left: 50%; animation-delay: 24s; }
+        .shell:nth-child(10) { content: '🦪'; font-size: 1.4rem; top: 70%; left: 40%; animation-delay: 27s; }
+        .shell:nth-child(11) { content: '🐚'; font-size: 2.1rem; top: 40%; right: 40%; animation-delay: 30s; }
+        .shell:nth-child(12) { content: '🦪'; font-size: 1.7rem; top: 60%; left: 70%; animation-delay: 33s; }
+        .shell:nth-child(13) { content: '🐚'; font-size: 1.9rem; top: 30%; left: 80%; animation-delay: 36s; }
+        .shell:nth-child(14) { content: '🦪'; font-size: 1.1rem; top: 80%; right: 50%; animation-delay: 39s; }
+        .shell:nth-child(15) { content: '🐚'; font-size: 2.3rem; top: 50%; left: 2%; animation-delay: 42s; }
+        .shell:nth-child(16) { content: '🦪'; font-size: 1.5rem; top: 10%; right: 70%; animation-delay: 45s; }
+
+        /* Sand shells */
+        .sand-shell {
+            position: absolute;
+            color: #daa520;
+            opacity: 0.6;
+            z-index: 0;
+        }
+
+        .sand-shell:nth-child(1) { content: '🐚'; font-size: 1rem; bottom: 10px; left: 20%; }
+        .sand-shell:nth-child(2) { content: '🦪'; font-size: 0.8rem; bottom: 5px; right: 30%; }
+        .sand-shell:nth-child(3) { content: '🐚'; font-size: 1.2rem; bottom: 15px; left: 60%; }
+        .sand-shell:nth-child(4) { content: '🦪'; font-size: 0.9rem; bottom: 8px; right: 10%; }
+        .sand-shell:nth-child(5) { content: '🐚'; font-size: 1rem; bottom: 12px; left: 40%; }
+        .sand-shell:nth-child(6) { content: '🦪'; font-size: 1.1rem; bottom: 6px; right: 50%; }
+
+        /* Sand particles */
+        .sand-particle {
+            position: fixed;
+            background: var(--sand-color);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: sandFloat 15s linear infinite;
+            z-index: -1;
+        }
+
+        .sand-particle:nth-child(1) { width: 4px; height: 4px; top: 10%; left: 20%; animation-delay: 0s; }
+        .sand-particle:nth-child(2) { width: 6px; height: 6px; top: 30%; left: 70%; animation-delay: 2s; }
+        .sand-particle:nth-child(3) { width: 3px; height: 3px; top: 50%; left: 10%; animation-delay: 4s; }
+        .sand-particle:nth-child(4) { width: 5px; height: 5px; top: 70%; left: 80%; animation-delay: 6s; }
+        .sand-particle:nth-child(5) { width: 4px; height: 4px; top: 90%; left: 40%; animation-delay: 8s; }
+
+        @keyframes waveFlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(1deg); }
+            50% { transform: translateY(0px) rotate(0deg); }
+            75% { transform: translateY(10px) rotate(-1deg); }
+        }
+
+        @keyframes shellFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        @keyframes sandFloat {
+            0% { transform: translateY(0px) translateX(0px); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(-40px) translateX(-10px); }
+            75% { transform: translateY(-20px) translateX(5px); }
+            100% { transform: translateY(0px) translateX(0px); }
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(to bottom, var(--sand-color) 0%, #d2b48c 50%, var(--sand-color) 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--fairy-pink);
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(0,0,0,0.1) 1px, transparent 1px),
+                radial-gradient(circle at 80% 80%, rgba(0,0,0,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 4rem;
+            color: var(--text-dark);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Year Section */
+        .year-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .year-title {
+            font-size: 2rem;
+            color: var(--fairy-pink);
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Trip Card */
+        .trip-card {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .trip-info {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .trip-title {
+            font-size: 1.5rem;
+            color: var(--fairy-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .trip-description {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .photo-placeholder {
+            flex: 0 0 200px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-left: 1rem;
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 119, 190, 0.8);
+            color: var(--text-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .trip-card {
+                flex-direction: column;
+            }
+            .photo-placeholder {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mallika's Travel Diaries</h1>
+        <p class="subtitle">Wandering through oceans of wonder and fairy-tale lands</p>
+        <div class="sand-shell">🐚</div>
+        <div class="sand-shell">🦪</div>
+        <div class="sand-shell">🐚</div>
+        <div class="sand-shell">🦪</div>
+        <div class="sand-shell">🐚</div>
+        <div class="sand-shell">🦪</div>
+    </header>
+
+    <nav>
+        <a href="index.html">← Back to Home</a>
+    </nav>
+
+    <div class="shell">🐚</div>
+    <div class="shell">🦪</div>
+    <div class="shell">🐚</div>
+    <div class="shell">🦪</div>
+    <div class="shell">🐚</div>
+    <div class="shell">🦪</div>
+    <div class="shell">🐚</div>
+    <div class="shell">🦪</div>
+    <div class="shell">🐚</div>
+    <div class="shell">🦪</div>
+    <div class="shell">🐚</div>
+    <div class="shell">🦪</div>
+    <div class="shell">🐚</div>
+    <div class="shell">🦪</div>
+    <div class="shell">🐚</div>
+    <div class="shell">🦪</div>
+
+    <div class="sand-particle"></div>
+    <div class="sand-particle"></div>
+    <div class="sand-particle"></div>
+    <div class="sand-particle"></div>
+    <div class="sand-particle"></div>
+
+    <div class="container">
+        <div class="year-section">
+            <h2 class="year-title">2026</h2>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">March: Hyderabad, Karimnagar & Visakhapatnam</h3>
+                    <p class="trip-description">Continuing the adventures in familiar yet beloved destinations.</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+        </div>
+
+        <div class="year-section">
+            <h2 class="year-title">2025</h2>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">June: Visakhapatnam & Puri</h3>
+                    <p class="trip-description">Coastal adventures in Vizag and the holy city of Puri in Odisha, with its temples and beaches.</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">October: Visakhapatnam, Kanchipuram & Mahabalipuram</h3>
+                    <p class="trip-description">Tamil Nadu treasures: Kanchipuram for silk sarees and temples, Mahabalipuram for rock-cut sculptures and beaches.</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">November: Mumbai & Shirdi</h3>
+                    <p class="trip-description">Spiritual trip to Shirdi for Sai Baba's shrine, combined with Mumbai's urban explorations.</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">December: Lonavala, Mahabaleshwar, Pune & Khandala</h3>
+                    <p class="trip-description">Hill station getaway in Lonavala and Mahabaleshwar, with stops in Pune and Khandala for scenic beauty and strawberries.</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+        </div>
+
+        <div class="year-section">
+            <h2 class="year-title">2024</h2>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">March: Silvassa</h3>
+                    <p class="trip-description">Exploring the union territory of Dadra and Nagar Haveli, with its tribal culture and natural beauty.</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">November: Warangal & Karimnagar</h3>
+                    <p class="trip-description">Historical Telangana cities, Warangal with its thousand pillar temple and Karimnagar's heritage sites.</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+        </div>
+
+        <div class="year-section">
+            <h2 class="year-title">2023</h2>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">April: Dwarka</h3>
+                    <p class="trip-description">Pilgrimage to Dwarka, the ancient city of Lord Krishna, with its temples and coastal charm.</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">October: Visakhapatnam</h3>
+                    <p class="trip-description">Another visit to Vizag, perhaps discovering new spots or revisiting favorites.</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">December: Alibaug</h3>
+                    <p class="trip-description">Beach holiday in Alibaug, enjoying the Konkan coastline, forts, and fresh seafood.</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+        </div>
+
+        <div class="year-section">
+            <h2 class="year-title">2022</h2>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">August: Udaipur</h3>
+                    <p class="trip-description">The city of lakes, Udaipur, with its romantic palaces, lakes, and the fairy-tale ambiance of Rajasthan.</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">October: Mumbai & Hyderabad</h3>
+                    <p class="trip-description">Bustling Mumbai with its vibrant energy, followed by a return to Hyderabad for more explorations.</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">December: Ujjain & Indore</h3>
+                    <p class="trip-description">Spiritual journey to Ujjain for the Kumbh Mela vibes and exploring the cultural hub of Indore.</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+        </div>
+
+        <div class="year-section">
+            <h2 class="year-title">2021</h2>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">Memories to be added later</h3>
+                    <p class="trip-description">Details of 2021 travels will be updated soon. Stay tuned for more adventures!</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+        </div>
+
+        <div class="year-section">
+            <h2 class="year-title">2020</h2>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">March: Visakhapatnam</h3>
+                    <p class="trip-description">Exploring the coastal city of Vizag, visiting beaches, submarine museum, and enjoying the scenic beauty of Andhra Pradesh.</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">October: Hyderabad</h3>
+                    <p class="trip-description">Diving into the historic charm of Hyderabad, exploring Charminar, Golconda Fort, and savoring the famous Hyderabadi cuisine.</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">December: Diu</h3>
+                    <p class="trip-description">A peaceful getaway to Diu, with its pristine beaches, Portuguese forts, and a laid-back island vibe.</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+        </div>
+
+        <div class="year-section">
+            <h2 class="year-title">2019</h2>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">December: Jaisalmer</h3>
+                    <p class="trip-description">Journey to the golden city of Jaisalmer, wandering through the Thar Desert, staying in luxury camps, and exploring the magnificent Jaisalmer Fort.</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+        </div>
+
+        <div class="year-section">
+            <h2 class="year-title">2018</h2>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">August: Jaipur & Jodhpur</h3>
+                    <p class="trip-description">Embarked on a royal adventure exploring the pink city of Jaipur and the blue city of Jodhpur. Marveling at palaces, forts, and the rich Rajasthani culture.</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">December: Daman</h3>
+                    <p class="trip-description">A serene coastal escape to Daman, enjoying the beaches, Portuguese architecture, and the tranquil Arabian Sea.</p>
+                </div>
+                <div class="photo-placeholder">Photo Placeholder</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Mallika | Travel Diaries | Made with 💜 and ocean waves 🌊</p>
+    </footer>
+
+    <script>
+        // Scroll-based background color change
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = scrollTop / docHeight;
+
+            // Interpolate between slightly darker baby blue and deep sea blue
+            const startColor = [129, 212, 250]; // #81d4fa
+            const endColor = [2, 119, 189]; // #0277bd
+
+            const r = Math.round(startColor[0] + (endColor[0] - startColor[0]) * scrollPercent);
+            const g = Math.round(startColor[1] + (endColor[1] - startColor[1]) * scrollPercent);
+            const b = Math.round(startColor[2] + (endColor[2] - startColor[2]) * scrollPercent);
+
+            document.body.style.background = `linear-gradient(to bottom, rgb(${r}, ${g}, ${b}) 0%, rgb(${Math.max(0, r-50)}, ${Math.max(0, g-50)}, ${Math.max(0, b+20)}) 100%)`;
+        });
+    </script>
+</body>
+</html></content>
+<parameter name="filePath">c:\.vscode\WT project\travel-diaries.html
