@@ -150,12 +150,14 @@
         }
 
         h1 {
-            font-family: 'Brush Script MT', cursive;
+            font-family: 'Georgia', 'Garamond', serif;
             font-size: 4rem;
-            color: var(--text-dark);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+            color: #1a3a52;
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.4);
             position: relative;
             z-index: 1;
+            letter-spacing: 2px;
         }
 
         .subtitle {
@@ -227,8 +229,9 @@
 
         .trip-title {
             font-size: 1.5rem;
-            color: var(--fairy-purple);
+            color: #c71585;
             margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .trip-description {
@@ -250,6 +253,79 @@
             border: 2px dashed rgba(255, 255, 255, 0.5);
         }
 
+        .trip-photo {
+            flex: 0 0 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-left: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .trip-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Lightbox Modal */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+        }
+
+        .lightbox-img {
+            width: 100%;
+            height: auto;
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            color: #bbb;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -266,6 +342,21 @@
             .photo-placeholder {
                 margin-left: 0;
                 margin-top: 1rem;
+            }
+            .trip-photo {
+                margin-left: 0;
+                margin-top: 1rem;
+                width: 100%;
+                max-width: 300px;
+            }
+            .lightbox-close {
+                top: 10px;
+                right: 20px;
+                font-size: 30px;
+            }
+            .lightbox-img {
+                max-width: 95vw;
+                max-height: 85vh;
             }
         }
     </style>
@@ -314,10 +405,31 @@
             <h2 class="year-title">2026</h2>
             <div class="trip-card">
                 <div class="trip-info">
-                    <h3 class="trip-title">March: Hyderabad, Karimnagar & Visakhapatnam</h3>
+                    <h3 class="trip-title">April: Udaipur</h3>
+                    <p class="trip-description">The City of Lakes in Rajasthan, featuring stunning palaces, serene lakes, and rich cultural heritage.</p>
+                </div>
+                <img src="images/shutterstock_1396159406.jpg" alt="Udaipur City of Lakes" class="trip-photo">
+            </div>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">March: Karimnagar</h3>
                     <p class="trip-description">Continuing the adventures in familiar yet beloved destinations.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+                <img src="images/images (1).jpg" alt="Karimnagar heritage site" class="trip-photo">
+            </div>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">March: Visakhapatnam</h3>
+                    <p class="trip-description">Coastal city adventures with beautiful beaches, the INS Kursura submarine museum, and scenic hill views.</p>
+                </div>
+                <img src="images/images.jpg" alt="Visakhapatnam beach" class="trip-photo">
+            </div>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">March: Hyderabad</h3>
+                    <p class="trip-description">The City of Pearls with iconic landmarks like Charminar, Golconda Fort, and world-famous Hyderabadi biryani.</p>
+                </div>
+                <img src="images/7d342-interesting-facts-hyderabad.webp" alt="Hyderabad cityscape" class="trip-photo">
             </div>
         </div>
 
@@ -328,28 +440,28 @@
                     <h3 class="trip-title">June: Visakhapatnam & Puri</h3>
                     <p class="trip-description">Coastal adventures in Vizag and the holy city of Puri in Odisha, with its temples and beaches.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+                <img src="images/IMG-20250617-WA0002.jpg" alt="Visakhapatnam beach" class="trip-photo">
             </div>
             <div class="trip-card">
                 <div class="trip-info">
                     <h3 class="trip-title">October: Visakhapatnam, Kanchipuram & Mahabalipuram</h3>
                     <p class="trip-description">Tamil Nadu treasures: Kanchipuram for silk sarees and temples, Mahabalipuram for rock-cut sculptures and beaches.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+               <img src="images/20251023_173052.jpg" alt="Mahabalipuram shore temple" class="trip-photo">
             </div>
             <div class="trip-card">
                 <div class="trip-info">
                     <h3 class="trip-title">November: Mumbai & Shirdi</h3>
                     <p class="trip-description">Spiritual trip to Shirdi for Sai Baba's shrine, combined with Mumbai's urban explorations.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+               <img src="images/download.jpg" alt="Shirdi Sai Baba shrine" class="trip-photo">
             </div>
             <div class="trip-card">
                 <div class="trip-info">
                     <h3 class="trip-title">December: Lonavala, Mahabaleshwar, Pune & Khandala</h3>
                     <p class="trip-description">Hill station getaway in Lonavala and Mahabaleshwar, with stops in Pune and Khandala for scenic beauty and strawberries.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+                <img src="images/lonavala.jpg" alt="Lonavala scenic view" class="trip-photo">
             </div>
         </div>
 
@@ -360,14 +472,14 @@
                     <h3 class="trip-title">March: Silvassa</h3>
                     <p class="trip-description">Exploring the union territory of Dadra and Nagar Haveli, with its tribal culture and natural beauty.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+               <img src="images/images (2).jpg" alt="Silvassa nature" class="trip-photo">
             </div>
             <div class="trip-card">
                 <div class="trip-info">
                     <h3 class="trip-title">November: Warangal & Karimnagar</h3>
                     <p class="trip-description">Historical Telangana cities, Warangal with its thousand pillar temple and Karimnagar's heritage sites.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+               <img src="images/download (1).jpg" alt="Warangal thousand pillar temple" class="trip-photo">
             </div>
         </div>
 
@@ -378,21 +490,21 @@
                     <h3 class="trip-title">April: Dwarka</h3>
                     <p class="trip-description">Pilgrimage to Dwarka, the ancient city of Lord Krishna, with its temples and coastal charm.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+                <img src="images/download (2).jpg" alt="Dwarka temple" class="trip-photo">
             </div>
             <div class="trip-card">
                 <div class="trip-info">
                     <h3 class="trip-title">October: Visakhapatnam</h3>
                     <p class="trip-description">Another visit to Vizag, perhaps discovering new spots or revisiting favorites.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+                <img src="images/download (3).jpg" alt="Visakhapatnam beach" class="trip-photo">
             </div>
             <div class="trip-card">
                 <div class="trip-info">
                     <h3 class="trip-title">December: Alibaug</h3>
                     <p class="trip-description">Beach holiday in Alibaug, enjoying the Konkan coastline, forts, and fresh seafood.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+               <img src="images/images (3).jpg" alt="Alibaug beach" class="trip-photo">
             </div>
         </div>
 
@@ -403,21 +515,21 @@
                     <h3 class="trip-title">August: Udaipur</h3>
                     <p class="trip-description">The city of lakes, Udaipur, with its romantic palaces, lakes, and the fairy-tale ambiance of Rajasthan.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+                <img src="images/images (4).jpg" alt="Udaipur City of Lakes" class="trip-photo">
             </div>
             <div class="trip-card">
                 <div class="trip-info">
                     <h3 class="trip-title">October: Mumbai & Hyderabad</h3>
                     <p class="trip-description">Bustling Mumbai with its vibrant energy, followed by a return to Hyderabad for more explorations.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+               <img src="images/images (5).jpg" alt="Mumbai cityscape" class="trip-photo">
             </div>
             <div class="trip-card">
                 <div class="trip-info">
                     <h3 class="trip-title">December: Ujjain & Indore</h3>
                     <p class="trip-description">Spiritual journey to Ujjain for the Kumbh Mela vibes and exploring the cultural hub of Indore.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+                <img src="images/download (4).jpg" alt="Ujjain Mahakaleshwar temple" class="trip-photo">
             </div>
         </div>
 
@@ -425,10 +537,45 @@
             <h2 class="year-title">2021</h2>
             <div class="trip-card">
                 <div class="trip-info">
-                    <h3 class="trip-title">Memories to be added later</h3>
-                    <p class="trip-description">Details of 2021 travels will be updated soon. Stay tuned for more adventures!</p>
+                    <h3 class="trip-title">June: Rani ki Vav</h3>
+                    <p class="trip-description">UNESCO World Heritage stepwell in Gujarat, showcasing intricate carvings and ancient water architecture.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+                <img src="images/download (5).jpg" alt="Rani ki Vav stepwell" class="trip-photo">
+            </div>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">August: Hyderabad</h3>
+                    <p class="trip-description">The City of Pearls with iconic landmarks like Charminar, Golconda Fort, and world-famous Hyderabadi biryani.</p>
+                </div>
+               <img src="images/images (6).jpg" alt="Hyderabad cityscape" class="trip-photo"> 
+            </div>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">September: Tirupati</h3>
+                    <p class="trip-description">Sacred pilgrimage to Tirumala Temple, home to Lord Venkateswara, with stunning hilltop views and spiritual significance.</p>
+                </div>
+                <img src="images/download (6).jpg" alt="Tirupati temple" class="trip-photo">
+            </div>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">October: Nashik and Shirdi</h3>
+                    <p class="trip-description">Nashik for its vineyards and grape gardens, combined with a spiritual visit to Shirdi for Sai Baba's shrine.</p>
+                </div>
+               <img src="images/download (7).jpg" alt="Nashik vineyards" class="trip-photo">
+            </div>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">November: Annavaram</h3>
+                    <p class="trip-description">Temple dedicated to Lord Veera Venkata Satyanarayana Swamy, perched on a hill with panoramic views of the surrounding landscape.</p>
+                </div>
+              <img src="images/download (8).jpg" alt="Annavaram temple" class="trip-photo">
+            </div>
+            <div class="trip-card">
+                <div class="trip-info">
+                    <h3 class="trip-title">December: Diu</h3>
+                    <p class="trip-description">Portuguese colonial heritage in Diu, with beautiful beaches, forts, and a blend of Indian and European architecture.</p>
+                </div>
+                <img src="images/download (9).jpg" alt="Diu beach" class="trip-photo">
             </div>
         </div>
 
@@ -439,21 +586,21 @@
                     <h3 class="trip-title">March: Visakhapatnam</h3>
                     <p class="trip-description">Exploring the coastal city of Vizag, visiting beaches, submarine museum, and enjoying the scenic beauty of Andhra Pradesh.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+               <img src="images/images (7).jpg" alt="Visakhapatnam beach" class="trip-photo">
             </div>
             <div class="trip-card">
                 <div class="trip-info">
                     <h3 class="trip-title">October: Hyderabad</h3>
                     <p class="trip-description">Diving into the historic charm of Hyderabad, exploring Charminar, Golconda Fort, and savoring the famous Hyderabadi cuisine.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+                <img src="images/download (10).jpg" alt="Hyderabad cityscape" class="trip-photo">
             </div>
             <div class="trip-card">
                 <div class="trip-info">
                     <h3 class="trip-title">December: Diu</h3>
                     <p class="trip-description">A peaceful getaway to Diu, with its pristine beaches, Portuguese forts, and a laid-back island vibe.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+               <img src="images/images (8).jpg" alt="Diu beach" class="trip-photo">
             </div>
         </div>
 
@@ -464,7 +611,7 @@
                     <h3 class="trip-title">December: Jaisalmer</h3>
                     <p class="trip-description">Journey to the golden city of Jaisalmer, wandering through the Thar Desert, staying in luxury camps, and exploring the magnificent Jaisalmer Fort.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+               <img src="images/download (11).jpg" alt="Jaisalmer Fort" class="trip-photo">
             </div>
         </div>
 
@@ -475,15 +622,23 @@
                     <h3 class="trip-title">August: Jaipur & Jodhpur</h3>
                     <p class="trip-description">Embarked on a royal adventure exploring the pink city of Jaipur and the blue city of Jodhpur. Marveling at palaces, forts, and the rich Rajasthani culture.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+                <img src="images/download (12).jpg" alt="Jaipur cityscape" class="trip-photo">
             </div>
             <div class="trip-card">
                 <div class="trip-info">
                     <h3 class="trip-title">December: Daman</h3>
                     <p class="trip-description">A serene coastal escape to Daman, enjoying the beaches, Portuguese architecture, and the tranquil Arabian Sea.</p>
                 </div>
-                <div class="photo-placeholder">Photo Placeholder</div>
+                <img src="images/download (13).jpg" alt="Daman beach" class="trip-photo">
             </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close">&times;</span>
+            <img class="lightbox-img" src="" alt="Full Screen Image">
         </div>
     </div>
 
@@ -492,6 +647,53 @@
     </footer>
 
     <script>
+        // Lightbox functionality - Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = lightbox.querySelector('.lightbox-img');
+            const lightboxClose = lightbox.querySelector('.lightbox-close');
+
+            // Get all trip-photo images
+            const tripPhotos = document.querySelectorAll('.trip-photo');
+            
+            console.log('Found ' + tripPhotos.length + ' photos'); // Debug log
+
+            // Add click event listener to each photo
+            tripPhotos.forEach(function(photo) {
+                photo.style.cursor = 'pointer';
+                photo.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Photo clicked:', this.src); // Debug log
+                    lightboxImg.src = this.src;
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            // Close button
+            lightboxClose.addEventListener('click', function() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            // Click outside to close
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Keyboard support - press Esc to close
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
         // Scroll-based background color change
         window.addEventListener('scroll', function() {
             const scrollTop = window.pageYOffset;
