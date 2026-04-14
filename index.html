@@ -47,6 +47,7 @@
       --seal-duration: 8s;
     }
 
+
     .volume-section[data-volume="2"] {
       --accent: #7dc8ff;
       --accent-deep: #356b97;
@@ -206,6 +207,107 @@
       text-transform: uppercase;
       color: var(--ink-muted);
       opacity: 0.85;
+    }
+
+    .welcome-stickers {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .welcome-sticker {
+      position: absolute;
+      width: 92px;
+      height: 92px;
+      border-radius: 24px;
+      box-shadow: 0 16px 30px rgba(82, 29, 89, 0.12);
+      display: grid;
+      place-items: center;
+      font-size: 10px;
+      text-align: center;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #46243f;
+      border: 2px solid rgba(255, 255, 255, 0.75);
+      background: #fff;
+      z-index: 0;
+      transform-origin: center;
+    }
+
+    .welcome-sticker::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at top left, rgba(255, 223, 240, 0.55), transparent 34%);
+      opacity: 0.95;
+      pointer-events: none;
+    }
+
+    .welcome > *:not(.welcome-stickers) {
+      position: relative;
+      z-index: 1;
+    }
+
+    .welcome-sticker span {
+      position: relative;
+      z-index: 1;
+      padding: 8px;
+    }
+
+    .welcome-sticker-image {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 24px;
+      box-shadow: 0 18px 32px rgba(82, 29, 89, 0.16);
+    }
+
+    .welcome-sticker.sticker-1 {
+      top: 12%;
+      left: 8%;
+      transform: rotate(-9deg);
+      background: rgba(255,255,255,0.72);
+      overflow: hidden;
+    }
+
+    .welcome-sticker.sticker-2 {
+      top: 18%;
+      right: 6%;
+      transform: rotate(7deg);
+      background: linear-gradient(135deg, #e7f2ff 0%, #f7fbff 100%);
+    }
+
+    .welcome-sticker.sticker-3 {
+      top: 48%;
+      left: 14%;
+      transform: rotate(4deg);
+      background: linear-gradient(135deg, #fff7d7 0%, #fffdf0 100%);
+    }
+
+    .welcome-sticker.sticker-4 {
+      top: 56%;
+      right: 10%;
+      transform: rotate(-6deg);
+      background: linear-gradient(135deg, #fbe8ff 0%, #fff4ff 100%);
+    }
+
+    .welcome-sticker.sticker-5 {
+      bottom: 12%;
+      left: 38%;
+      transform: rotate(8deg);
+      background: linear-gradient(135deg, #d6ffea 0%, #f6fff7 100%);
+    }
+
+    .welcome-sticker.sticker-6 {
+      bottom: 10%;
+      right: 34%;
+      transform: rotate(-4deg);
+      background: linear-gradient(135deg, #ffe7dd 0%, #fff5f0 100%);
     }
 
     .intro-scrapbook {
@@ -1231,6 +1333,16 @@
       </div>
     </section>
     <section class="welcome reveal reveal-2" id="top" aria-labelledby="welcome-title">
+      <div class="welcome-stickers" aria-hidden="true">
+        <div class="welcome-sticker sticker-1">
+          <img class="welcome-sticker-image" src="assets/stickers/sticker-1.png" alt="flower sticker" />
+        </div>
+        <div class="welcome-sticker sticker-2"><span>late nights</span></div>
+        <div class="welcome-sticker sticker-3"><span>daydream</span></div>
+        <div class="welcome-sticker sticker-4"><span>good vibes</span></div>
+        <div class="welcome-sticker sticker-5"><span>keep going</span></div>
+        <div class="welcome-sticker sticker-6"><span>stay cozy</span></div>
+      </div>
       <p class="welcome-eyebrow">The Archive Dossier</p>
       <h1 class="welcome-title" id="welcome-title">Welcome, reader.</h1>
       <p class="welcome-lede">
