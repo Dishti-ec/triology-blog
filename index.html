@@ -14,50 +14,50 @@
   <style>
     /* ========== THEME TOKENS (edit here) ========== */
     :root {
-      --bg-page: #f0ebda;
-      --bg-card: #e8e2d2;
-      --bg-placeholder: #d4ccba;
-      --ink: #1a1a1a;
-      --ink-muted: #3d3d35;
-      --olive: #2b2b1a;
-      --gold-muted: #c8b560;
-      --header-bg: #1a1a1a;
-      --header-text: #f0ebda;
+      --bg-page: #fff8f4;
+      --bg-card: #fff3ea;
+      --bg-placeholder: #ffefe1;
+      --ink: #331f34;
+      --ink-muted: #6e5a72;
+      --olive: #7f5b73;
+      --gold-muted: #f4bda0;
+      --header-bg: rgba(255, 223, 232, 0.95);
+      --header-text: #4a2b41;
       /* Volume accents (overridden by [data-volume]) */
-      --accent: #c94c4c;
-      --accent-deep: #8b2323;
-      --accent-soft: rgba(201, 76, 76, 0.12);
+      --accent: #ff8cb2;
+      --accent-deep: #c63370;
+      --accent-soft: rgba(255, 140, 178, 0.2);
       --seal-duration: 8s;
       --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
       --font-ui: "DM Sans", system-ui, sans-serif;
       --max-w: 1280px;
       --pad-x: 40px;
-      --radius-frame: 2px;
-      --polaroid-bg: #faf8f4;
-      --polaroid-ink-edge: #1a1a1a;
-      --dog-fold: #9a8b6a;
-      --shadow-lift: 0 12px 28px rgba(26, 26, 26, 0.12);
-      --shadow-polaroid: 0 4px 0 rgba(26, 26, 26, 0.06), 0 18px 40px rgba(26, 26, 26, 0.14);
+      --radius-frame: 12px;
+      --polaroid-bg: #fffdf9;
+      --polaroid-ink-edge: #6e4e5f;
+      --dog-fold: #ffd3dc;
+      --shadow-lift: 0 14px 34px rgba(83, 38, 82, 0.12);
+      --shadow-polaroid: 0 6px 0 rgba(83, 38, 82, 0.06), 0 18px 36px rgba(83, 38, 82, 0.12);
     }
 
     .volume-section[data-volume="1"] {
-      --accent: #c94c4c;
-      --accent-deep: #8b2323;
-      --accent-soft: rgba(201, 76, 76, 0.14);
+      --accent: #ff8cb2;
+      --accent-deep: #c63370;
+      --accent-soft: rgba(255, 140, 178, 0.24);
       --seal-duration: 8s;
     }
 
     .volume-section[data-volume="2"] {
-      --accent: #2e6b8a;
-      --accent-deep: #1a4a66;
-      --accent-soft: rgba(46, 107, 138, 0.16);
+      --accent: #7dc8ff;
+      --accent-deep: #356b97;
+      --accent-soft: rgba(125, 200, 255, 0.24);
       --seal-duration: 8s;
     }
 
     .volume-section[data-volume="3"] {
-      --accent: #c8a545;
-      --accent-deep: #7a6228;
-      --accent-soft: rgba(200, 165, 69, 0.2);
+      --accent: #ffd186;
+      --accent-deep: #b37a24;
+      --accent-soft: rgba(255, 209, 111, 0.24);
       --seal-duration: 5s;
     }
 
@@ -78,6 +78,13 @@
       background: var(--bg-page);
       color: var(--ink);
       transition: background-color 0.45s ease, color 0.3s ease;
+      background-image:
+        radial-gradient(circle at 15% 12%, rgba(255, 142, 178, 0.14), transparent 18%),
+        radial-gradient(circle at 85% 8%, rgba(255, 206, 152, 0.18), transparent 16%),
+        radial-gradient(circle at 18% 85%, rgba(168, 219, 255, 0.16), transparent 14%);
+      background-repeat: no-repeat;
+      position: relative;
+      overflow-x: hidden;
     }
 
     /* ========== PAGE LOAD — staggered reveal ========== */
@@ -135,7 +142,7 @@
       transform: translateX(-50%);
       width: min(420px, 70vw);
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--olive), transparent);
+      background: linear-gradient(90deg, transparent, var(--accent-soft), transparent);
       opacity: 0.35;
     }
 
@@ -144,7 +151,7 @@
       font-weight: 700;
       letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--olive);
+      color: var(--accent-deep);
       margin-bottom: 16px;
     }
 
@@ -156,6 +163,7 @@
       letter-spacing: -0.02em;
       margin: 0 0 20px;
       max-width: 14ch;
+      color: var(--accent-deep);
     }
 
     .welcome-lede {
@@ -176,19 +184,19 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
       text-decoration: none;
-      color: var(--bg-page);
-      background: var(--ink);
-      border: 2px solid var(--olive);
+      color: #fff;
+      background: var(--accent-deep);
+      border: 2px solid rgba(198, 77, 129, 0.48);
       padding: 16px 32px;
       border-radius: 999px;
-      box-shadow: 0 8px 24px rgba(26, 26, 26, 0.15);
+      box-shadow: 0 10px 28px rgba(198, 77, 129, 0.16);
       transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
 
     .btn-welcome:hover {
       transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 14px 32px rgba(26, 26, 26, 0.2);
-      background: var(--olive);
+      box-shadow: 0 14px 32px rgba(198, 77, 129, 0.2);
+      background: var(--accent);
     }
 
     .welcome-hint {
@@ -198,6 +206,208 @@
       text-transform: uppercase;
       color: var(--ink-muted);
       opacity: 0.85;
+    }
+
+    .intro-scrapbook {
+      position: relative;
+      overflow: hidden;
+      padding: 88px var(--pad-x) 44px;
+      min-height: 760px;
+    }
+
+    .scrapbook-wall {
+      position: absolute;
+      inset: 0;
+      top: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .scrapbook-string {
+      position: absolute;
+      left: 6%;
+      right: 6%;
+      height: 0;
+      border-top: 1px dashed rgba(115, 66, 99, 0.25);
+      opacity: 0.85;
+    }
+
+    .scrapbook-string.string-1 {
+      top: 68px;
+      left: 6%;
+      right: 6%;
+      border-top-style: dashed;
+    }
+
+    .scrapbook-string.string-2 {
+      top: 188px;
+      left: 10%;
+      right: 10%;
+      border-top-style: dashed;
+    }
+
+    .scrapbook-string.string-3 {
+      top: 308px;
+      left: 12%;
+      right: 12%;
+      border-top-style: dashed;
+    }
+
+    .scrapbook-card {
+      position: absolute;
+      width: 160px;
+      padding: 10px;
+      background: #fff;
+      border: 1px solid rgba(171, 117, 143, 0.25);
+      border-radius: 18px;
+      box-shadow: 0 20px 42px rgba(83, 38, 82, 0.1);
+      z-index: 1;
+    }
+
+    .scrapbook-card .card-pin {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      width: 18px;
+      height: 18px;
+      background: #ffb5d7;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      box-shadow: inset 0 0 0 3px #fff;
+    }
+
+    .scrapbook-card .card-plate {
+      min-height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 14px;
+      font-size: 10px;
+      line-height: 1.4;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      background: linear-gradient(140deg, #fff7f4 0%, #fff0e3 100%);
+      border-radius: 16px;
+      border: 1px dashed rgba(115, 66, 99, 0.14);
+    }
+
+    .scrapbook-card.card-1 {
+      top: 40px;
+      left: 8%;
+      width: 150px;
+      transform: rotate(-2deg);
+    }
+
+    .scrapbook-card.card-2 {
+      top: 180px;
+      left: 24%;
+      width: 160px;
+      transform: rotate(1.5deg);
+    }
+
+    .scrapbook-card.card-3 {
+      top: 40px;
+      right: 10%;
+      width: 150px;
+      transform: rotate(-1deg);
+    }
+
+    .scrapbook-card.card-4 {
+      top: 180px;
+      right: 14%;
+      width: 160px;
+      transform: rotate(2deg);
+    }
+
+    .scrapbook-card.card-5 {
+      top: 320px;
+      left: 16%;
+      width: 160px;
+      transform: rotate(-1.5deg);
+    }
+
+    .scrapbook-card.card-6 {
+      top: 320px;
+      right: 16%;
+      width: 150px;
+      transform: rotate(1deg);
+    }
+
+    .intro-post {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(260px, 1.2fr) minmax(260px, 0.9fr);
+      align-items: start;
+      gap: 32px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding-top: 380px;
+      padding-bottom: 56px;
+    }
+
+    .intro-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent-deep);
+      margin-bottom: 14px;
+    }
+
+    .intro-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.02;
+      margin: 0 0 18px;
+      color: var(--accent-deep);
+      max-width: 12ch;
+    }
+
+    .intro-text {
+      max-width: 40rem;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--ink-muted);
+      margin: 0;
+    }
+
+    .intro-frame {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .intro-frame .polaroid {
+      max-width: 300px;
+      padding: 12px 12px 44px 12px;
+    }
+
+    .intro-frame .polaroid-inner {
+      aspect-ratio: 280 / 340;
+      max-height: 340px;
+    }
+
+    .intro-frame .placeholder-inner {
+      min-height: 300px;
+      font-size: 12px;
+      color: var(--ink-muted);
+      letter-spacing: 0.18em;
+    }
+
+    .intro-scrapbook::after {
+      content: "";
+      position: absolute;
+      left: 4%;
+      bottom: 12px;
+      width: 200px;
+      height: 180px;
+      background: radial-gradient(circle at 20% 20%, rgba(255, 166, 196, 0.24), transparent 42%);
+      filter: blur(12px);
+      z-index: 0;
     }
 
     /* ========== VOLUMES — normal document scroll ========== */
@@ -242,23 +452,23 @@
       gap: 10px;
       font-family: var(--font-ui);
       font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
+      font-weight: 700;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--header-text);
-      background: #2a2a27;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 244, 248, 0.98);
+      border: 1px solid rgba(171, 117, 143, 0.2);
       cursor: pointer;
       padding: 11px 20px 10px 16px;
       margin: 0;
-      border-radius: 2px 2px 0 0;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-      transform: translateY(4px);
-      opacity: 0.75;
+      border-radius: 999px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      transform: translateY(2px);
+      opacity: 0.88;
       transition:
         transform 0.25s ease,
         opacity 0.2s ease,
-        background 0.25s ease,
+        background 0.2s ease,
         color 0.2s ease,
         border-color 0.2s ease,
         box-shadow 0.25s ease;
@@ -266,12 +476,12 @@
     }
 
     .volume-tab:hover {
-      opacity: 0.95;
-      border-color: rgba(200, 181, 96, 0.35);
+      opacity: 0.98;
+      border-color: rgba(255, 166, 196, 0.5);
     }
 
     .volume-tab:focus-visible {
-      outline: 2px solid var(--gold-muted);
+      outline: 2px solid rgba(198, 77, 129, 0.8);
       outline-offset: 3px;
     }
 
@@ -308,15 +518,21 @@
     }
 
     .volume-tab[data-vol="1"][aria-current="page"] {
-      background: #8b2323;
+      background: #ffbccf;
+      color: #5f2f45;
+      border-color: rgba(255, 168, 185, 0.4);
     }
 
     .volume-tab[data-vol="2"][aria-current="page"] {
-      background: #1a4a66;
+      background: #aed8ff;
+      color: #3f4866;
+      border-color: rgba(138, 184, 255, 0.45);
     }
 
     .volume-tab[data-vol="3"][aria-current="page"] {
-      background: #7a6228;
+      background: #ffe5b1;
+      color: #6e4b25;
+      border-color: rgba(255, 204, 114, 0.45);
     }
 
     .volume-tab[aria-current="page"] .vol-tab-icon {
@@ -333,8 +549,8 @@
       padding: 0;
       background: var(--header-bg);
       color: var(--header-text);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.35);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      border-bottom: 1px solid rgba(225, 177, 196, 0.55);
+      box-shadow: 0 8px 24px rgba(110, 57, 98, 0.08);
     }
 
     .nav-shell {
@@ -967,6 +1183,53 @@
   </header>
 
   <main class="site-main">
+    <section class="intro-scrapbook reveal reveal-2" id="scrapbook-intro" aria-labelledby="scrapbook-title">
+      <div class="scrapbook-wall" aria-hidden="true">
+        <span class="scrapbook-string string-1"></span>
+        <span class="scrapbook-string string-2"></span>
+        <span class="scrapbook-string string-3"></span>
+        <div class="scrapbook-card card-1">
+          <span class="card-pin"></span>
+          <div class="card-plate">[ PHOTO ]</div>
+        </div>
+        <div class="scrapbook-card card-2">
+          <span class="card-pin"></span>
+          <div class="card-plate">[ NOTE ]</div>
+        </div>
+        <div class="scrapbook-card card-3">
+          <span class="card-pin"></span>
+          <div class="card-plate">[ MEMORY ]</div>
+        </div>
+        <div class="scrapbook-card card-4">
+          <span class="card-pin"></span>
+          <div class="card-plate">[ STICKER ]</div>
+        </div>
+        <div class="scrapbook-card card-5">
+          <span class="card-pin"></span>
+          <div class="card-plate">[ QUOTE ]</div>
+        </div>
+        <div class="scrapbook-card card-6">
+          <span class="card-pin"></span>
+          <div class="card-plate">[ MOMENT ]</div>
+        </div>
+      </div>
+      <div class="intro-post">
+        <div class="intro-copy">
+          <p class="intro-eyebrow">TRIOLOGY scrapbook</p>
+          <h2 class="intro-title" id="scrapbook-title">A cheerful collage for teenage days</h2>
+          <p class="intro-text">
+            Pin your first memory here with a bright introduction, then scroll down to explore the three volumes. This is a playful space for pictures, notes, and happy vibes.
+          </p>
+        </div>
+        <div class="intro-frame">
+          <div class="polaroid polaroid-portrait dog-ear-tr">
+            <div class="polaroid-inner">
+              <div class="placeholder-inner">[ IMAGE PLACEHOLDER ]</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <section class="welcome reveal reveal-2" id="top" aria-labelledby="welcome-title">
       <p class="welcome-eyebrow">The Archive Dossier</p>
       <h1 class="welcome-title" id="welcome-title">Welcome, reader.</h1>
