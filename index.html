@@ -217,6 +217,11 @@
       z-index: 0;
     }
 
+    /* Allow individual stickers to be interactive despite container having no pointer-events */
+    .welcome-stickers .welcome-sticker {
+      pointer-events: auto;
+    }
+
     .welcome-sticker {
       position: absolute;
       width: 92px;
@@ -265,6 +270,65 @@
       object-fit: cover;
       border-radius: 24px;
       box-shadow: 0 18px 32px rgba(82, 29, 89, 0.16);
+    }
+
+    /* Sticker acts as a button for audio player */
+    .welcome-sticker.sticker-1 {
+      cursor: pointer;
+    }
+
+    /* Audio modal (Spotify embed) */
+    .audio-modal {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      z-index: 1400;
+      pointer-events: none;
+    }
+
+    .audio-modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      transition: opacity 220ms ease;
+    }
+
+    .audio-modal-content {
+      position: relative;
+      width: min(720px, 96vw);
+      background: linear-gradient(180deg, #0f1720, #07101a);
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 30px 80px rgba(2,6,23,0.6);
+      transform: translateY(12px) scale(0.98);
+      transition: transform 220ms ease, opacity 220ms ease;
+      opacity: 0;
+      pointer-events: auto;
+    }
+
+    .audio-modal.show .audio-modal-overlay { opacity: 1; }
+    .audio-modal.show .audio-modal-content { transform: translateY(0) scale(1); opacity: 1; }
+
+    .audio-modal .modal-close {
+      position: absolute;
+      right: 10px;
+      top: 8px;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .audio-player-iframe {
+      width: 100%;
+      height: 352px;
+      border: none;
+      border-radius: 8px;
+      display: block;
     }
 
     .welcome-sticker.sticker-1 {
@@ -1334,7 +1398,7 @@
     </section>
     <section class="welcome reveal reveal-2" id="top" aria-labelledby="welcome-title">
       <div class="welcome-stickers" aria-hidden="true">
-        <div class="welcome-sticker sticker-1">
+        <div class="welcome-sticker sticker-1" tabindex="0" role="button" aria-label="Play Magic Shop by BTS">
           <img class="welcome-sticker-image" src="assets/stickers/sticker-1.png" alt="flower sticker" />
         </div>
         <div class="welcome-sticker sticker-2"><span>late nights</span></div>
@@ -1547,6 +1611,18 @@
     </div>
   </main>
 
+  <!-- Audio modal for sticker player -->
+  <div id="audio-modal" class="audio-modal" aria-hidden="true">
+    <div class="audio-modal-overlay" id="audio-modal-overlay"></div>
+    <div class="audio-modal-content" role="dialog" aria-modal="true" aria-labelledby="audio-modal-title">
+      <button class="modal-close" id="audio-modal-close" aria-label="Close player">✕</button>
+      <h3 id="audio-modal-title" style="color:#fff; margin:0 0 8px; font-family:var(--font-ui); font-size:16px;">MAGIC SHOP — BTS</h3>
+      <div class="audio-player">
+        <iframe data-testid="embed-iframe" class="audio-player-iframe" style="border-radius:12px" data-src="https://open.spotify.com/embed/track/37nOpaUof3d4Xsmr6moAiI?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+
   <script>
     (function () {
       var tabs = document.querySelectorAll(".volume-tab");
@@ -1579,5 +1655,50 @@
       syncFromHash();
     })();
   </script>
+    <script>
+      (function () {
+        var sticker = document.querySelector('.welcome-sticker.sticker-1');
+        var modal = document.getElementById('audio-modal');
+        var overlay = document.getElementById('audio-modal-overlay');
+        var closeBtn = document.getElementById('audio-modal-close');
+        var iframe = modal ? modal.querySelector('iframe[data-src]') : null;
+        var originalSrc = iframe ? iframe.getAttribute('data-src') : '';
+
+        function openModal() {
+          if (!modal) return;
+          if (iframe && !iframe.src) iframe.src = originalSrc;
+          modal.classList.add('show');
+          modal.setAttribute('aria-hidden', 'false');
+          closeBtn.focus();
+        }
+
+        function closeModal() {
+          if (!modal) return;
+          modal.classList.remove('show');
+          modal.setAttribute('aria-hidden', 'true');
+          // stop playback by removing src
+          if (iframe) iframe.src = '';
+        }
+
+        if (sticker) {
+          // Open in-page modal and lazy-load the Spotify embed for same-tab playback
+          sticker.addEventListener('click', function (e) {
+            e.preventDefault();
+            openModal();
+          });
+          sticker.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              openModal();
+            }
+          });
+        }
+
+        if (overlay) overlay.addEventListener('click', closeModal);
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        // close with ESC
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+      })();
+    </script>
 </body>
 </html>
