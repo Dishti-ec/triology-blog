@@ -1,17 +1,340 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Pacifico&display=swap');
+/* =============================== */
+/* Custom Underline Styles for Blogs*/
+/* =============================== */
+.underline-double {
+  text-decoration-line: underline;
+  text-decoration-style: double;
+  text-decoration-thickness: 2.5px;
+  text-underline-offset: 4px;
+}
+.underline-wavy {
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-thickness: 2.5px;
+  text-underline-offset: 4px;
+}
+.underline-curvy {
+  position: relative;
+}
+.underline-curvy::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 8px;
+  background-repeat: repeat-x;
+  width: 100%;
+  pointer-events: none;
+  background-image: url('data:image/svg+xml;utf8,<svg width="60" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M0 6 Q 10 2, 20 6 T 40 6 T 60 6" stroke="%23d35400" stroke-width="2" fill="none"/></svg>');
+}
+
+main,
+header,
+footer {
+  max-width: 1100px;
+  margin-left: 60px;
+  margin-right: 110px;
+}
+
+/* =============================== */
+/* Journal Navbar Stack Effect     */
+/* =============================== */
+
+/* Main vertical navbar on the right side of the page */
+.journal-navbar { 
+  position: fixed;
+  top: 90px;
+  right: -20px;   /* pushes navbar to right edge */
+  left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 50;
+  background: transparent;
+}
+/* Individual navigation link styling */
+.nav-link {
+  display: block;
+  font-family: 'Ecosmith', 'Caveat', 'Pacifico', cursive, 'Georgia', serif;
+  font-size: 1.13rem;
+  color: #636ed6;
+  background: #e6eaf3;
+  border-left: 6px solid #b5baea;
+  border-radius: 0 18px 18px 0;
+  margin-bottom: 0.5rem;
+  padding: 0.7em 2.2em 0.7em 1.2em;
+  box-shadow: 2px 2px 8px 0 rgba(80, 80, 80, 0.07);
+  position: relative;
+  min-width: 120px;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s, border-color 0.18s;
+  text-decoration: none;
+  outline: none;
+}
+.nav-link:not(.nav-active):hover, .nav-link:not(.nav-active):focus {
+  background: #abb2ec;
+  color: #2d2d2d;
+  border-left: 8px solid #b5baea;
+  box-shadow: 4px 6px 18px 0 rgba(80, 80, 80, 0.13);
+}
+.nav-link.nav-active {
+  background: #e0d8c7;
+  color: #2d2d2d;
+  border-left: 10px solid #b5baea;
+  font-weight: 700;
+  box-shadow: 4px 8px 18px 0 rgba(80, 80, 80, 0.13);
+}
+.nav-link.nav-active {
+  visibility: hidden;
+}
+.journal-navbar::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(to bottom, #d6d1c4 80%, #bdb7a6 100%);
+  border-radius: 6px;
+  z-index: -1;
+  opacity: 0.7;
+}
+.journal-navbar .nav-link {
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+}
+
+/* Sticky Flags as Rectangular Arrows */
+.nav-sticky-flag {
+  display: block;
+  position: absolute;
+  right : 100%;
+  min-width: 54px;
+  font-family: 'Ecosmith', 'Caveat', 'Pacifico', cursive, 'Georgia', serif;
+  font-size: 1.01rem;
+  font-weight: 600;
+  padding: 0.45em 1.2em 0.45em 0.9em;
+  margin-top: 0.2em;
+  margin-left: 0.2em;
+  border-radius: 2px 3px 3px 2px;
+  box-shadow: 2px 2px 8px 0 rgba(80, 80, 80, 0.13);
+  z-index: 41;
+  color: #fff;
+  background: #bdb7a6;
+  clip-path: polygon(20% 0, 100% 0, 100% 100%, 20% 100%, 0% 50%);
+  border: 1.5px solid #a89e8a;
+  opacity: 0.93;
+  pointer-events: none;
+  transition: background 0.18s, color 0.18s;
+}
+.nav-flag-home {
+  top: 0.7em;
+  background: #e3b97a;
+  border-color: #cfae6b;
+  color: #4a3a2a;
+  margin-right: -px;
+}
+.nav-flag-about {
+  top: 3.8em;
+  background: #e7a7a7;
+  border-color: #b97a7a;
+  color: #4a2a2a;
+  
+}
+.nav-flag-hobby {
+  top: 7.4em;
+  background: #a7cbe7;
+  border-color: #7a9bb9;
+  color: #2a3a4a;
+}
+.nav-flag-blog {
+  top: 10.5em;
+  background: #a7e7b9;
+  border-color: #7ab97a;
+  color: #2a4a3a;
+}
+
+@media (max-width: 900px) {
+  .journal-navbar {
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    min-height: unset;
+    background: #f3efe6;
+    box-shadow: 0 2px 8px 0 rgba(80, 80, 80, 0.07);
+  }
+  .nav-link {
+    margin-bottom: 0;
+    margin-right: 1.2em;
+    border-radius: 18px;
+    border-left: 6px solid #e0d8c7;
+    border-right: none;
+    min-width: 80px;
+    padding: 0.7em 1.2em 0.7em 1.2em;
+  }
+  .nav-sticky-flag {
+    display: none;
+  }
+}
+.journal-top-edge {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 170px; /* leave space for right page stack */
+  height: 20px;
+  /*background: #f3efe6; /* same as your page */
+  border-top: 2px solid #cfc6b2;
+  border-right: 2px solid #cfc6b2;
+  border-top-right-radius: 1000px;
+  z-index: 40;
+}
+/* RIGHT BOOK EDGE — vertical stacked pages */
+.journal-right-edge {
+  margin-top: 2px;
+  position: fixed;
+  top: 0;
+  right:100px;
+  width: 75px;
+  height: 100vh;
+  z-index: 40;
+  pointer-events: none;
+
+  /* vertical page lines */
+  background: repeating-linear-gradient(
+    to right,
+    #e8e2d6 0px,
+    #e8e2d6 2px,
+    #cfc6b2 2px,
+    #cfc6b2 4px
+  );
+  border-top-right-radius: 100px; /* ONE clean corner */
+  overflow: hidden; /* clips inner lines to match curve */
+  /* shadow ONLY on right side */
+  box-shadow: 
+    4px 0 8px rgba(0,0,0,0.15),
+    8px 0 14px rgba(0,0,0,0.08);
+  
+}
+
+/* =============================== */
+/* Handwriting Font for Blogs      */
+/* =============================== */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Pacifico&family=Indie+Flower&family=Shadows+Into+Light&display=swap');
 @font-face {
   font-family: 'Ecosmith';
   src: url('https://fonts.cdnfonts.com/s/19136/Ecosmith.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-}
+  }
+  .journal-sticky-tabs {
+    position: absolute;
+    right: 0;
+    top: 60px;
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 38px;
+    pointer-events: auto;
+    z-index: 2;
+  }
+
+  .sticky-tab {
+    font-family: 'Ecosmith', 'Caveat', 'Pacifico', cursive, 'Georgia', serif;
+    font-size: 1.08rem;
+    padding: 0.5em 1.2em 0.5em 1.1em;
+    border: none;
+    border-radius: 10px 18px 12px 14px;
+    margin-right: -18px;
+    margin-top: 0;
+    margin-bottom: 0;
+    box-shadow: 0 2px 8px 0 rgba(180, 140, 120, 0.13), 2px 2px 10px 0 rgba(80, 80, 80, 0.10);
+    cursor: pointer;
+    transition: transform 0.18s cubic-bezier(.4,1.4,.6,1.1), box-shadow 0.18s cubic-bezier(.4,1.4,.6,1.1), background 0.18s, color 0.18s;
+    pointer-events: auto;
+    min-width: 110px;
+    text-align: left;
+    background: #fffbe7;
+    color: #7a5c2e;
+    position: relative;
+    z-index: 2;
+    outline: none;
+    border: 1.5px solid #f0e6c7;
+    filter: drop-shadow(0 2px 8px rgba(180,140,120,0.07));
+    opacity: 0.98;
+    box-sizing: border-box;
+    user-select: none;
+  }
+  .sticky-tab.sticky-about {
+    background: linear-gradient(90deg, #f7e7c6 80%, #fbeec1 100%);
+    color: #5a4a1b;
+    box-shadow: 0 2px 8px 0 rgba(255, 220, 120, 0.13), 2px 2px 10px 0 rgba(180, 140, 120, 0.10);
+    border-color: #f0e6c7;
+  }
+  .sticky-tab.sticky-hobbies {
+    background: linear-gradient(90deg, #e6f7e7 80%, #c1fbe2 100%);
+    color: #1b5a3a;
+    box-shadow: 0 2px 8px 0 rgba(120, 255, 180, 0.13), 2px 2px 10px 0 rgba(180, 140, 120, 0.10);
+    border-color: #d6f7e6;
+  }
+  .sticky-tab.sticky-experience {
+    background: linear-gradient(90deg, #f7e6f7 80%, #fbc1f6 100%);
+    color: #5a1b4a;
+    box-shadow: 0 2px 8px 0 rgba(255, 120, 220, 0.13), 2px 2px 10px 0 rgba(180, 140, 120, 0.10);
+    border-color: #f7e6f7;
+  }
+  .sticky-tab:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255,255,255,0.18) 0%, transparent 100%);
+    border-radius: 10px 0 0 14px;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .sticky-tab:hover, .sticky-tab:focus {
+    transform: translateX(12px) scale(1.045) rotate(-2deg);
+    box-shadow: 0 6px 18px 0 rgba(80, 80, 80, 0.18), 0 2px 0 #bdb7a6;
+    outline: 2px solid #e2c97a;
+    z-index: 3;
+    opacity: 1;
+  }
+  .sticky-tab:active {
+    transform: translateX(16px) scale(1.06) rotate(-3deg);
+    box-shadow: 0 10px 24px 0 rgba(80, 80, 80, 0.22), 0 2px 0 #bdb7a6;
+    opacity: 1;
+  }
+  .sticky-tab:focus-visible {
+    outline: 2.5px solid #b3d8fc;
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 900px) {
+    .journal-right-edge-container {
+      display: none;
+    }
+  }
+
+/* Ecosmith font for headings and main text */
 .ecosmith {
   font-family: 'Ecosmith', 'Caveat', 'Pacifico', cursive, 'Georgia', serif !important;
   font-size: 1.18rem;
   letter-spacing: 0.01em;
 }
 
+/* Handwriting font for blog content (to be used in blog pages) */
+.handwriting {
+  font-family: 'Indie Flower', 'Shadows Into Light', 'Caveat', cursive, 'Pacifico', 'Georgia', serif !important;
+  font-size: 1.22rem;
+  letter-spacing: 0.01em;
+}
+
 body {
+  /*margin-right: 200px;
+  margin-top: 40px;*/
   background: #f9f7f2;
   position: relative;
   min-height: 100vh;
@@ -20,15 +343,15 @@ body {
 }
 
 
-}
-.journal-lines-bg {
+
+/*.journal-lines-bg {
   pointer-events: none;
   position: fixed;
   inset: 0;
   z-index: 1;
   background-image: repeating-linear-gradient(to bottom, #110d00 0 1px, transparent 1px 45px);
   opacity: 0.18;
-}
+}*/
 .satin-ribbon {
   position: fixed;
   left: 0;
@@ -67,7 +390,7 @@ body {
 .sticky-flag {
   position: absolute;
   display: inline-block;
-  min-width: 90px;
+  min-width: 10 0px;
   max-width: 180px;
   font-size: 1.08rem;
   padding: 0.5em 1.1em;
@@ -98,6 +421,9 @@ body {
   position: relative;
   min-height: 220px;
 }
+.journal-entry:nth-child(even) {
+  flex-direction: row-reverse;
+}
 .journal-photo-block {
   position: relative;
   margin-right: 2.2rem;
@@ -105,6 +431,20 @@ body {
   max-width: 320px;
   flex: 0 0 220px;
 }
+.journal-entry:nth-child(odd) .journal-photo-block {
+  margin-right: 2.2rem;
+}
+
+.journal-entry:nth-child(even) .journal-photo-block {
+  margin-left: 2.2rem;
+}
+/*.journal-photo-block-even {
+position: static;
+  left: 00px;
+  min-width: 220px;
+  max-width: 220px;
+  flex: 0 0 220px;
+}*/
 .journal-photo {
   width: 100%;
   border-radius: 18px;
@@ -134,6 +474,7 @@ body {
 
 .journal-text-block {
   flex: 1 1 60%;
+  
   position: relative;
   min-width: 0;
   padding-top: 0.5rem;
@@ -153,7 +494,9 @@ body {
   font-family: 'Ecosmith', 'Caveat', 'Pacifico', cursive, 'Georgia', serif;
 }
 
-/* Stationery items */
+/* =============================== */
+/* Stationery items                */
+/* =============================== */
 .stationery {
   position: absolute;
   display: inline-block;
@@ -189,10 +532,13 @@ body {
 /* Pen cursor SVG (luxury, black with gold accents) */
 html, body, * { cursor: url('icons8-fountain-pen-48.png'), pointer; }
 
-/* Responsive Design */
+/* =============================== */
+/* Responsive Design               */
+/* =============================== */
 @media (max-width: 900px) {
   .journal-main { padding: 2.5rem 0.5rem 2.5rem 1.5rem; }
   .journal-entry { flex-direction: column; align-items: flex-start; }
+  
   .journal-photo-block { margin-right: 0; margin-bottom: 1.2rem; }
 }
 @media (max-width: 700px) {
@@ -240,11 +586,12 @@ body {
   position: relative;
   min-height: 100vh;
   overflow-x: hidden;
-  cursor: url('https://cdn.jsdelivr.net/gh/PalakAI/pen-cursor/pen-cursor.cur'), pointer;
+  cursor: url('icons8-fountain-pen-48.png'), pointer;
 }
 .grid-bg {
   pointer-events: none;
   position: fixed;
+  margin-right: 150px;
   inset: 0;
   z-index: 0;
   background-image: linear-gradient(to right, rgba(104, 99, 99, 0.845) 1px, transparent 1px), linear-gradient(to bottom, rgba(104, 99, 99, 0.845) 1px, transparent 1px);
@@ -254,6 +601,7 @@ body {
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Pacifico&display=swap');
 header.hero.journal-hero {
   position: relative;
+  
   min-height: 60vh;
   display: flex;
   align-items: center;
@@ -303,7 +651,7 @@ header.hero.journal-hero {
 .journal-pen {
   font-size: 1.3em;
   vertical-align: middle;
-  opacity: 0.7;
+  opacity: 1.7;
 }
 .journal-sticky {
   position: absolute;
@@ -560,24 +908,27 @@ main {
 }
 .btn {
   display: inline-block;
-  background: linear-gradient(90deg, var(--accent3), var(--accent4));
-  color: var(--text-main);
-  border: none;
+  background: #fdf6ec;
+  color: #5b4636;
+  border: 1.5px solid #e6d3b3;
   border-radius: 22px;
   padding: 0.7em 1.7em;
   font-size: 1.05rem;
   font-weight: 500;
-  box-shadow: 0 2px 8px 0 rgba(80, 80, 120, 0.07);
-  cursor: pointer;
-  transition: box-shadow 0.25s, background 0.25s, transform 0.18s cubic-bezier(.4,0,.2,1);
-  outline: none;
-  position: relative;
-  overflow: hidden;
+
+  box-shadow: 
+    0 3px 0 #e6d3b3,
+    0 6px 15px rgba(0,0,0,0.06);
+
+  cursor: inherit;
+  transition: all 0.2s ease;
 }
 .btn:hover {
-  background: linear-gradient(90deg, var(--accent4), var(--accent3));
-  box-shadow: 0 4px 16px 0 rgba(80, 80, 120, 0.13);
-  transform: translateY(-2px) scale(1.04);
+  background: #fffaf3;
+  transform: translateY(2px);
+  box-shadow: 
+    0 1px 0 #e6d3b3,
+    0 3px 8px rgba(0,0,0,0.05);
 }
 .btn:active {
   animation: btn-press 0.18s cubic-bezier(.4,0,.2,1);

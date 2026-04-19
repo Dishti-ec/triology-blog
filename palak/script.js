@@ -1,9 +1,41 @@
 // script.js
 // Handles scroll reveal, hero animation, and micro-interactions
 
+// Sticky Tab Navigation for Journal Right Edge
+document.addEventListener('DOMContentLoaded', function () {
+  // Get all sticky tab elements
+  const tabs = document.querySelectorAll('.sticky-tab');
+  tabs.forEach(tab => {
+    // Click scroll to target section
+    tab.addEventListener('click', function (e) {
+      const target = document.querySelector(tab.getAttribute('data-target'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        tab.blur();
+      }
+    });
+    // Keyboard accessibility for sticky tabs
+    tab.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        tab.click();
+      }
+    });
+    // Focus/active state for accessibility
+    tab.addEventListener('focus', function () {
+      tab.classList.add('focus-visible');
+    });
+    tab.addEventListener('blur', function () {
+      tab.classList.remove('focus-visible');
+    });
+  });
+});
+
+// Animate journal-photo images sliding in as they enter the viewport
 document.addEventListener('DOMContentLoaded', () => {
-  // Animate journal-photo images sliding in
+  // Get all journal entry elements
   const entries = document.querySelectorAll('.journal-entry');
+  // Create an IntersectionObserver to watch for entries entering the viewport
   const observer = new window.IntersectionObserver((entriesList) => {
     entriesList.forEach(entry => {
       if (entry.isIntersecting) {
@@ -27,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  Luxury pen SVG cursor with hover/click animation
+ /* Luxury pen SVG cursor with hover/click animation
   let penCursor = null;
   if (window.matchMedia('(pointer: fine)').matches) {
     penCursor = document.createElement('img');
@@ -57,5 +89,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mouseout', () => {
       penCursor.style.opacity = '0';
     });
-  }
+  }*/
 });
