@@ -11,7 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
-  <style>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap" rel="stylesheet"><style>
     /* ========== THEME TOKENS (edit here) ========== */
     :root {
       --bg-page: #fff8f4;
@@ -398,6 +399,94 @@
       opacity: 0.85;
     }
 
+    /* Handwritten quote accents positioned between scrapbook rows */
+    .handwritten-quote {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Great Vibes', cursive;
+      color: #5f2f45;
+      font-size: clamp(18px, 2.6vw, 34px);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      z-index: 3;
+      pointer-events: none;
+      text-shadow: 0 6px 18px rgba(83, 38, 82, 0.08);
+    }
+
+    /* tuned vertical positions to sit evenly between scrapbook rows */
+    .handwritten-quote.quote-1 { top: 118px; }
+    .handwritten-quote.quote-2 { top: 258px; }
+    .handwritten-quote.quote-3 { top: 388px; }
+
+    .handwritten-quote {
+      font-family: 'Just Another Hand', cursive;
+      line-height: 1;
+      max-width: 84%;
+      word-break: keep-all;
+      hyphens: none;
+      padding: 0 6px; /* small horizontal breathing room */
+    }
+
+    .handwritten-quote .quote-inner { white-space: pre; }
+
+    /* cinematic sweep overlay during reveal */
+    .handwritten-quote::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(90deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.00) 50%, rgba(255,255,255,0.06) 100%);
+      transform: translateX(-120%);
+      z-index: 2;
+      opacity: 0.9;
+    }
+
+    .handwritten-quote.reveal-start::before {
+      animation: sweep 900ms cubic-bezier(.2,.9,.3,1) 120ms forwards;
+    }
+
+    @keyframes sweep { to { transform: translateX(120%); } }
+
+    /* per-character cinematic reveal */
+    .char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(18px) rotate(-6deg) scale(0.98);
+      filter: blur(2px);
+      will-change: transform, opacity, filter;
+      animation: char-cinematic 640ms cubic-bezier(.2,.9,.3,1) forwards;
+    }
+
+    .char.space {
+      display: inline-block;
+      width: 0.42em;
+      opacity: 1;
+      transform: none;
+      filter: none;
+      animation: none;
+    }
+
+    @keyframes char-cinematic {
+      to { opacity: 1; transform: translateY(0) rotate(0) scale(1); filter: blur(0); }
+    }
+
+    /* Responsive adjustments: reduce size and spacing on small screens */
+    @media (max-width: 900px) {
+      .handwritten-quote { font-size: clamp(16px, 3.4vw, 26px); }
+      .handwritten-quote.quote-1 { top: 96px; }
+      .handwritten-quote.quote-2 { top: 156px; }
+      .handwritten-quote.quote-3 { top: 256px; }
+    }
+
+    @media (max-width: 520px) {
+      .handwritten-quote { font-size: clamp(14px, 4.2vw, 20px); max-width: 92%; }
+      .handwritten-quote.quote-1 { top: 90px; }
+      .handwritten-quote.quote-2 { top: 140px; }
+      .handwritten-quote.quote-3 { top: 210px; }
+    }
+
     .scrapbook-string.string-1 {
       top: 68px;
       left: 6%;
@@ -468,7 +557,7 @@
 
     .scrapbook-card.card-2 {
       top: 180px;
-      left: 24%;
+      left: 13%;
       width: 160px;
       transform: rotate(1.5deg);
     }
@@ -482,21 +571,21 @@
 
     .scrapbook-card.card-4 {
       top: 180px;
-      right: 14%;
+      right: 13%;
       width: 160px;
       transform: rotate(2deg);
     }
 
     .scrapbook-card.card-5 {
       top: 320px;
-      left: 16%;
+      left: 10%;
       width: 160px;
       transform: rotate(-1.5deg);
     }
 
     .scrapbook-card.card-6 {
       top: 320px;
-      right: 16%;
+      right: 10%;
       width: 150px;
       transform: rotate(1deg);
     }
@@ -1378,6 +1467,9 @@
           <span class="card-pin"></span>
           <div class="card-plate">[ MOMENT ]</div>
         </div>
+        <div class="handwritten-quote quote-1"><span class="quote-inner">THIS IS THE CAMPUS WHERE WE FIRST MET</span></div>
+        <div class="handwritten-quote quote-2 typewriter"><span class="quote-inner">FROM THE CLASSROOMS AND SHARED LECTURES</span></div>
+        <div class="handwritten-quote quote-3 typewriter"><span class="quote-inner">AND ALL THE LOVELY MEMORIES MADE IN BETWEEN</span></div>
       </div>
       <div class="intro-post">
         <div class="intro-copy">
@@ -1446,7 +1538,7 @@
                       <div class="placeholder-inner">[ YOUR IMAGE ]</div>
                     </div>
                     <div class="frame-decor" aria-hidden="true"><span>★</span><span>★</span></div>
-                    <a href="/triology-blog/dishti/index.html" class="frame-arrow" aria-label="Next volume">↓</a>
+                    <a href="https://dishti-ec.github.io/dark/index.html" class="frame-arrow" aria-label="Next volume">↓</a>
                   </div>
                 </div>
               </div>
@@ -1649,6 +1741,41 @@
       }
       window.addEventListener("hashchange", syncFromHash);
       syncFromHash();
+    })();
+  </script>
+  <script>
+    // Cinematic per-character reveal for all handwritten quotes
+    (function () {
+      function splitToChars(el, charClass, baseDelay) {
+        var text = el.textContent || '';
+        el.innerHTML = '';
+        for (var i = 0; i < text.length; i++) {
+          var ch = text[i];
+          var span = document.createElement('span');
+          // mark spaces so we can give them width and avoid animation
+          if (ch === ' ') {
+            span.className = charClass + ' space';
+            span.textContent = '\u00A0'; // non-breaking space
+          } else {
+            span.className = charClass;
+            span.textContent = ch;
+            span.style.animationDelay = (baseDelay + i * 55) + 'ms';
+          }
+          el.appendChild(span);
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        var quoteEls = document.querySelectorAll('.handwritten-quote');
+        quoteEls.forEach(function (quoteEl, idx) {
+          var inner = quoteEl.querySelector('.quote-inner');
+          if (!inner) return;
+          var base = 180 + idx * 320; // stagger each quote block
+          splitToChars(inner, 'char', base);
+          // trigger cinematic sweep overlay
+          setTimeout(function () { quoteEl.classList.add('reveal-start'); }, base - 120);
+        });
+      });
     })();
   </script>
     <script>
