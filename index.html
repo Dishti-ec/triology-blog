@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap" rel="stylesheet"><style>
-    /* ========== THEME TOKENS (edit here) ========== */
+    /* = ========= THEME TOKENS (edit here) ========== */
     :root {
       --bg-page: #fff8f4;
       --bg-card: #fff3ea;
@@ -548,6 +548,14 @@
       border: 1px dashed rgba(115, 66, 99, 0.14);
     }
 
+    .scrapbook-card .card-plate img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 10px;
+    }
+
     .scrapbook-card.card-1 {
       top: 40px;
       left: 8%;
@@ -887,6 +895,32 @@
       pointer-events: auto;
     }
 
+    a.seal-wrap {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      display: block;
+    }
+
+    /* SVG defaults to receiving pointer events; without this, clicks hit <textPath> / fragment refs instead of the link */
+    .seal-wrap .seal-ring,
+    .seal-wrap .seal-ring *,
+    .seal-wrap .seal-svg,
+    .seal-wrap .seal-svg * {
+      pointer-events: none;
+    }
+
+    /* Inner label is non-interactive so the <a> is always the activation target */
+    .seal-wrap > .seal-center {
+      pointer-events: none;
+    }
+
+    a.seal-wrap:focus-visible {
+      outline: 2px solid var(--accent-deep);
+      outline-offset: 4px;
+      border-radius: 50%;
+    }
+
     .seal-wrap:hover .seal-ring {
       animation-duration: 18s;
       animation-direction: reverse;
@@ -897,6 +931,7 @@
       inset: 0;
       animation: spin-ring var(--seal-duration) linear infinite;
       transition: animation-duration 0.4s ease;
+      pointer-events: none;
     }
 
     .seal-svg {
@@ -936,11 +971,16 @@
       text-transform: uppercase;
       border: 2px solid var(--gold-muted);
       box-shadow: var(--shadow-lift);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
       cursor: pointer;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
+      z-index: 2;
     }
 
-    .seal-center:hover {
+    .seal-wrap:hover .seal-center {
       transform: translate(-50%, -50%) scale(1.04);
       box-shadow: 0 16px 36px rgba(26, 26, 26, 0.2);
     }
@@ -1445,27 +1485,27 @@
         <span class="scrapbook-string string-3"></span>
         <div class="scrapbook-card card-1">
           <span class="card-pin"></span>
-          <div class="card-plate">[ PHOTO ]</div>
+          <div class="card-plate"><img src="assets/Image 1.jpeg" alt="scrapbook photo 1"></div>
         </div>
         <div class="scrapbook-card card-2">
           <span class="card-pin"></span>
-          <div class="card-plate">[ NOTE ]</div>
+          <div class="card-plate"><img src="assets/Image 4.jpeg" alt="scrapbook photo 2"></div>
         </div>
         <div class="scrapbook-card card-3">
           <span class="card-pin"></span>
-          <div class="card-plate">[ MEMORY ]</div>
+          <div class="card-plate"><img src="assets/Image 2.jpeg" alt="scrapbook photo 3"></div>
         </div>
         <div class="scrapbook-card card-4">
           <span class="card-pin"></span>
-          <div class="card-plate">[ STICKER ]</div>
+          <div class="card-plate"><img src="assets/Image 3.jpeg" alt="scrapbook photo 4"></div>
         </div>
         <div class="scrapbook-card card-5">
           <span class="card-pin"></span>
-          <div class="card-plate">[ QUOTE ]</div>
+          <div class="card-plate"><img src="assets/Image 6.jpeg" alt="scrapbook photo 5"></div>
         </div>
         <div class="scrapbook-card card-6">
           <span class="card-pin"></span>
-          <div class="card-plate">[ MOMENT ]</div>
+          <div class="card-plate"><img src="assets/Image 5.jpeg" alt="scrapbook photo 6"></div>
         </div>
         <div class="handwritten-quote quote-1"><span class="quote-inner">THIS IS THE CAMPUS WHERE WE FIRST MET</span></div>
         <div class="handwritten-quote quote-2 typewriter"><span class="quote-inner">FROM THE CLASSROOMS AND SHARED LECTURES</span></div>
@@ -1516,7 +1556,7 @@
                     <span>Ignites</span>
                   </h1>
                 </div>
-                <div class="seal-wrap" aria-hidden="false">
+                <a class="seal-wrap" href="dishti/blog/index.html" aria-label="Open Volume I blog">
                   <div class="seal-ring">
                     <svg class="seal-svg" viewBox="0 0 100 100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <defs>
@@ -1529,16 +1569,16 @@
                       </text>
                     </svg>
                   </div>
-                  <a class="seal-center" href="https://dishti-ec.github.io/dark/index.html#lab" aria-label="Open Volume I lab">Start<br />Generate</a>
-                </div>
+                  <span class="seal-center">Start<br />Generate</span>
+                </a>
                 <div class="portrait-col">
                   <div class="polaroid polaroid-portrait dog-ear-tr">
                     <div class="polaroid-inner">
-                      <div class="glitch-overlay" aria-hidden="true"></div>
-                      <div class="placeholder-inner">[ YOUR IMAGE ]</div>
-                    </div>
+                    <div class="glitch-overlay" aria-hidden="true"></div>
+                    <div class="placeholder-inner"><img class="frame-img" src="assets/camera-frame-intro.jpg" alt="Volume I portrait"></div>
+                  </div>
                     <div class="frame-decor" aria-hidden="true"><span>★</span><span>★</span></div>
-                    <a href="https://dishti-ec.github.io/dark/index.html#blog" class="frame-arrow" aria-label="Next volume">↓</a>
+                    <a href="dishti/blog/index.html" class="frame-arrow" aria-label="Next volume">↓</a>
                   </div>
                 </div>
               </div>
@@ -1557,7 +1597,7 @@
                     <p>
                       Origin threads, discovery, and the spark that opens the archive. Replace this copy with your synopsis, edition notes, or a collector’s statement.
                     </p>
-                    <a class="btn-cta" href="https://dishti-ec.github.io/dark/index.html#lab">
+                    <a class="btn-cta" href="dishti/blog/index.html">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                       </svg>
@@ -1580,7 +1620,7 @@
                     <span>Depths</span>
                   </h1>
                 </div>
-                <div class="seal-wrap">
+                <a class="seal-wrap" href="mallika/travel-diaries.html" aria-label="Open Volume II travel diaries">
                   <div class="seal-ring">
                     <svg class="seal-svg" viewBox="0 0 100 100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <defs>
@@ -1593,16 +1633,16 @@
                       </text>
                     </svg>
                   </div>
-                  <a class="seal-center" href="https://dishti-ec.github.io/triology-blog/mallika/index.html#projects" aria-label="Open Volume II projects">Start<br />Generate</a>
-                </div>
+                  <span class="seal-center">Start<br />Generate</span>
+                </a>
                 <div class="portrait-col">
                   <div class="polaroid polaroid-portrait dog-ear-tr">
                     <div class="polaroid-inner">
                       <div class="glitch-overlay" aria-hidden="true"></div>
-                      <div class="placeholder-inner">[ YOUR IMAGE ]</div>
+                      <div class="placeholder-inner"><img class="frame-img" src="assets/mallika-portrait.jpeg" alt="Mallika portrait"></div>
                     </div>
                     <div class="frame-decor" aria-hidden="true"><span>★</span><span>★</span></div>
-                   <a href="https://dishti-ec.github.io/triology-blog/mallika/index.html#travel-diaries" class="frame-arrow" aria-label="Next volume">↓</a>
+                   <a href="mallika/travel-diaries.html" class="frame-arrow" aria-label="Next volume">↓</a>
                   </div>
                 </div>
               </div>
@@ -1610,7 +1650,7 @@
                 <div class="polaroid polaroid-landscape dog-ear-bl">
                   <div class="polaroid-inner">
                     <div class="glitch-overlay" aria-hidden="true"></div>
-                    <div class="placeholder-inner">[ YOUR IMAGE ]</div>
+                    <div class="placeholder-inner"><img class="frame-img" src="assets/mallika-landscape.jpeg" alt="Mallika landscape"></div>
                   </div>
                 </div>
                 <aside class="info-folder">
@@ -1621,7 +1661,7 @@
                     <p>
                       Deeper blues, withheld truths, and archival noise. Swap placeholders for stills with dust, grain, or subtle glitch in post — the layout adds a light scanline veil for this volume.
                     </p>
-                    <a class="btn-cta" href="https://dishti-ec.github.io/triology-blog/mallika/index.html#projects">
+                    <a class="btn-cta" href="mallika/travel-diaries.html">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                       </svg>
@@ -1644,7 +1684,7 @@
                     <span>Covenant</span>
                   </h1>
                 </div>
-                <div class="seal-wrap">
+                <a class="seal-wrap" href="palak/exp.html" aria-label="Open Volume III exp">
                   <div class="seal-ring">
                     <svg class="seal-svg" viewBox="0 0 100 100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <defs>
@@ -1657,8 +1697,8 @@
                       </text>
                     </svg>
                   </div>
-                  <span class="seal-center" role="text">Start<br />Generate</span>
-                </div>
+                  <span class="seal-center">Start<br />Generate</span>
+                </a>
                 <div class="portrait-col">
                   <div class="polaroid polaroid-portrait dog-ear-tr">
                     <div class="polaroid-inner">
@@ -1666,7 +1706,7 @@
                       <div class="placeholder-inner">[ YOUR IMAGE ]</div>
                     </div>
                     <div class="frame-decor" aria-hidden="true"><span>★</span><span>★</span></div>
-                    <a href="/triology-blog/palak/index.html" class="frame-arrow" aria-label="Back to welcome">↑</a>
+                    <a href="palak/exp.html" class="frame-arrow" aria-label="Back to welcome">↑</a>
                   </div>
                 </div>
               </div>
@@ -1685,7 +1725,7 @@
                     <p>
                       Gold light, resolution, and the collector’s edition voice. The ring spins faster here — hover still slows the seal for a moment of inspection.
                     </p>
-                    <a class="btn-cta" href="/triology-blog/palak/index.html">
+                    <a class="btn-cta" href="palak/exp.html">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                       </svg>
