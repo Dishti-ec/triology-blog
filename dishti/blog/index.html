@@ -13,6 +13,21 @@
 </head>
 
 <body class="blog-archive-page">
+  <div id="scroll-progress"></div>
+
+  <div id="loader-wrapper">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+  </div>
+
+  <div id="planet-container">
+    <div class="planet"></div>
+  </div>
+  <div id="nebula-container"></div>
+  <div id="star-background"></div>
+  <canvas id="constellation-canvas"></canvas>
+  <div id="shooting-star-container"></div>
   <nav class="blog-nav" aria-label="Blog">
     <div class="blog-nav-links">
       <a href="../dark/index.html">Portfolio</a>
@@ -27,22 +42,35 @@
     </label>
   </nav>
 
-  <header class="blog-archive-hero">
-    <h1>Thought Archive</h1>
-    <p class="blog-archive-dek">ideas, experiments, reflections</p>
+  <header class="blog-archive-hero hero">
+    <div class="header-content">
+      <p class="small-intro">Thoughts, moments, and quiet experiments.</p>
+      <h1 class="fade-up title">THOUGHTS ARCHIVE</h1>
+      <hr style="width:48px; margin: 18px auto; border-color: rgba(255,255,255,0.12);">
+      <p class="blog-archive-dek subtitle">ideas, experiments, reflections</p>
+    </div>
+
+    <a href="#blog-archive-grid" class="scroll-indicator" aria-label="Scroll to archive">
+      <span>Scroll</span>
+      <div class="scroll-indicator-arrow"></div>
+    </a>
   </header>
 
   <div class="blog-filter-row" role="toolbar" aria-label="Sort ideas by category">
-    <button type="button" class="blog-filter-btn is-active" data-filter="all">All</button>
-    <button type="button" class="blog-filter-btn" data-filter="tech">Tech</button>
-    <button type="button" class="blog-filter-btn" data-filter="thoughts">Thoughts</button>
-    <button type="button" class="blog-filter-btn" data-filter="experiments">Experiments</button>
+    <button type="button" class="blog-filter-btn is-active" data-filter="all">Everything</button>
+    <button type="button" class="blog-filter-btn" data-filter="moments">Moments</button>
+    <button type="button" class="blog-filter-btn" data-filter="milestones">Milestones</button>
+    <button type="button" class="blog-filter-btn" data-filter="reflections">Reflections</button>
+    <button type="button" class="blog-filter-btn" data-filter="journeys">Journeys</button>
+    <div id="filter-hint" class="filter-hint" aria-hidden="true">Hover a filter for a gentle hint</div>
   </div>
 
   <div id="blog-archive-grid" class="blog-archive-masonry"></div>
 
   <script src="../js/blog-data.js"></script>
   <script defer src="../js/blog-archive.js"></script>
+  <script defer src="../js/index.js"></script>
+  <script defer src="../js/blog-orbit.js"></script>
   <script>
     (function () {
       var sw = document.getElementById('theme-switch');
