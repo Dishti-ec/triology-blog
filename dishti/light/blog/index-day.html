@@ -13,6 +13,8 @@
 </head>
 
 <body class="blog-archive-page">
+  <div id="sky-background"></div>
+  <div id="cursor-sunbeam"></div>
   <nav class="blog-nav" aria-label="Blog">
     <div class="blog-nav-links">
       <a href="../index-day.html">Portfolio</a>
@@ -27,9 +29,17 @@
     </label>
   </nav>
 
-  <header class="blog-archive-hero">
-    <h1>Thought Archive</h1>
-    <p class="blog-archive-dek">ideas, experiments, reflections</p>
+  <header class="blog-archive-hero hero">
+    <div class="header-content">
+      <p class="small-intro">Thoughts, moments, and quiet experiments.</p>
+      <h1 class="fade-up title">THOUGHTS ARCHIVE</h1>
+      <hr style="width:48px; margin: 18px auto; border-color: rgba(0,0,0,0.08);">
+      <p class="blog-archive-dek subtitle">ideas, experiments, reflections</p>
+    </div>
+    <a href="#blog-archive-grid" class="scroll-indicator" aria-label="Scroll to archive">
+      <span>Scroll</span>
+      <div class="scroll-indicator-arrow"></div>
+    </a>
   </header>
 
   <div class="blog-filter-row" role="toolbar" aria-label="Sort ideas by category">
@@ -51,6 +61,52 @@
       sw.addEventListener('change', function () {
         if (!sw.checked) window.location.href = '../../blog/index.html';
       });
+    })();
+  </script>
+  <script>
+    // Minimal cloud generator + scroll-driven background for light archive
+    (function () {
+      function createClouds() {
+        const sky = document.getElementById('sky-background');
+        if (!sky) return;
+        const cloudCount = 9;
+        for (let i = 0; i < cloudCount; i++) {
+          const cloud = document.createElement('div');
+          cloud.className = 'cloud';
+          const w = Math.random() * 200 + 80;
+          const h = w * 0.36;
+          const top = Math.random() * 60;
+          const duration = Math.random() * 60 + 45;
+          const delay = Math.random() * -80;
+          const opacity = Math.random() * 0.35 + 0.45;
+          cloud.style.cssText = `width:${w}px;height:${h}px;top:${top}vh;animation-duration:${duration}s;animation-delay:${delay}s;opacity:${opacity};filter:blur(${Math.random()*2+0.5}px)`;
+          sky.appendChild(cloud);
+        }
+      }
+
+      function lerp(a,b,t){return a+(b-a)*t}
+      function rgb(a){return 'rgb('+a.join(',')+')'}
+      function blend(c1,c2,t){return [Math.round(lerp(c1[0],c2[0],t)),Math.round(lerp(c1[1],c2[1],t)),Math.round(lerp(c1[2],c2[2],t))]}
+
+      function initScrollBg() {
+        const topA = [200,230,255]; // light blue-ish
+        const topB = [245,239,230]; // warm cream
+        const midA = [221,240,255];
+        const midB = [245,239,230];
+        window.addEventListener('scroll', () => {
+          const pct = Math.min(1, window.scrollY / (document.documentElement.scrollHeight - window.innerHeight));
+          const t = Math.pow(pct, 0.9);
+          const top = blend(topA, topB, t);
+          const mid = blend(midA, midB, t);
+          document.body.style.background = `linear-gradient(180deg, ${rgb(top)} 0%, ${rgb(mid)} 12%, ${rgb([245,239,230])} 60%, #f5efe6 100%)`;
+        }, {passive:true});
+      }
+
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        createClouds(); initScrollBg();
+      } else {
+        window.addEventListener('DOMContentLoaded', () => { createClouds(); initScrollBg(); });
+      }
     })();
   </script>
 </body>
